@@ -1,0 +1,6 @@
+---
+- name: test tmux role
+  hosts: all
+
+  roles:
+    - tmux

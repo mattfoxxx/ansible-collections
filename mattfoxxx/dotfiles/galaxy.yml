@@ -1,0 +1,24 @@
+namespace: "mattfoxxx"
+name: "dotfiles"
+version: "0.0.1"
+description: collection for the configuration of my dotfiles
+readme: "README.md"
+authors:
+  - "mattfoxxx (https://github.com/mattfoxx)"
+dependencies:
+  "community.general": "*"
+#    "other_namespace.collection1": ">=1.0.0"
+#    "other_namespace.collection2": ">=2.0.0,<3.0.0"
+#    "anderson55.my_collection": "*"    # note: "*" selects the highest version available
+license:
+  - "MIT"
+tags:
+  - dotfiles
+  - collection
+repository: "https://www.github.com/mattfoxxx/ansible-dotfiles"
+issues: "https://www.github.com/mattfoxxx/ansible-dotfiles/issues"
+# A list of file glob-like patterns used to filter any files or directories that should not be included in the build
+# artifact. A pattern is matched from the relative path of the file or directory of the collection directory. This
+# uses 'fnmatch' to match the files or directories. Some directories and files like 'galaxy.yml', '*.pyc', '*.retry',
+# and '.git' are always filtered
+build_ignore: []

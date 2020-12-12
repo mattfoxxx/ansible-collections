@@ -1,0 +1,30 @@
+---
+# tasks file for tmux
+- include_tasks: archlinux.yml
+  when: ansible_distribution == "Archlinux"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Debian"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - unbound
+
+#- include_tasks: redhat.yml
+#  when: ansible_os_family == "RedHat"
+#  tags:
+#    - unbound
+
+- name: Add configuration for tmux
+  copy:
+    src: "tmux.conf"
+    dest: "/home/{{ item }}/.tmux.conf"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: "0644"
+  with_items: "{{ users }}"
