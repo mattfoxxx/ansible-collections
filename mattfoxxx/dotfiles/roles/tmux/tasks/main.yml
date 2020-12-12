@@ -22,7 +22,7 @@
 
 - name: Add configuration for tmux
   copy:
-    src: "tmux.conf"
+    src: "{{ tmux_config }}"
     dest: "/home/{{ item }}/.tmux.conf"
     owner: "{{ item }}"
     group: "{{ item }}"

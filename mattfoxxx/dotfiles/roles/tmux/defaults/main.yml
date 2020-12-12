@@ -2,3 +2,4 @@
 # defaults file for tmux
 users:
   - matze
+tmux_config: "tmux.conf"
