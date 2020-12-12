@@ -10,7 +10,7 @@ class ModuleDocFragment(object):
 
     DOCUMENTATION = r'''
 options:
-  pager:
+  users:
     description:
-    - description for pager option
+    - this is a list of users which also specifys the home directory the dotfile is put into.
 '''
