@@ -1,6 +1,6 @@
 namespace: "mattfoxxx"
 name: "dotfiles"
-version: "0.0.1"
+version: "0.0.2"
 description: collection for the configuration of my dotfiles
 readme: "README.md"
 authors:
