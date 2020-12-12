@@ -20,15 +20,20 @@
       }
 
   tasks:
-    - name: display variables
-      debug:
-        var: 
-          - users
-          - tmux_config
-          - vim_config
+    - debug:
+        var: users
+      tags: debug
+    - debug:
+        var: tmux_config
+      tags: debug
+    - debug:
+        var: vim_config
+      tags: debug
 
-    - name: display post install message
+    - name: __________POST INSTALL MESSAGE__________
       debug:
         msg:
           - 'Things left to do:'
           - '- VIM: Execute in vim :PluginInstall'
+      tags:
+        - always
