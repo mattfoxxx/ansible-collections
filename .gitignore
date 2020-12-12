@@ -2,6 +2,6 @@
 # by suppling a source filename variable to supporting roles.
 # this is using the ansible local pathing mechanism as per:
 # https://docs.ansible.com/ansible/latest/user_guide/playbook_pathing.html
-**/templates/*
-**/vars/*
-**/files/*
+playbooks/templates/*
+playbooks/vars/*
+playbooks/files/*
