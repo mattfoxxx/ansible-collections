@@ -33,3 +33,4 @@
   git:
     repo: "{{ vundle }}"
     dest: "/home/{{ item }}/.vim/bundle/Vundle.vim"
+  with_items: "{{ users }}"
