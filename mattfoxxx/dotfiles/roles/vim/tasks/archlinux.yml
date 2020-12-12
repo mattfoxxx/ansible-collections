@@ -1,0 +1,5 @@
+---
+- name:
+  community.general.pacman:
+    name: vim
+    state: present

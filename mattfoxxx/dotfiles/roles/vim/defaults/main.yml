@@ -1,0 +1,7 @@
+---
+# defaults file for vim
+# clone vundle to bundle directory ~/.vim/bundle/Vundle.vim
+users:
+  - matze
+vim_config: "vimrc"
+vundle: "https://github.com/VundleVim/Vundle.vim.git"

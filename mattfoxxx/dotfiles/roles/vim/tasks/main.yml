@@ -1,0 +1,35 @@
+---
+# tasks file for vim
+
+- include_tasks: archlinux.yml
+  when: ansible_distribution == "Archlinux"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Debian"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - unbound
+#- include_tasks: redhat.yml
+#  when: ansible_os_family == "RedHat"
+#  tags:
+#    - unbound
+
+- name: copy dotfile for vim
+  copy:
+    src: "{{ vim_config }}"
+    dest: "/home/{{ item }}/.vimrc"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: "0644"
+  with_items: "{{ users }}"
+
+- name: Git checkout
+  git:
+    repo: "{{ vundle }}"
+    dest: "/home/{{ item }}/.vim/bundle/Vundle.vim"

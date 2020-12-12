@@ -5,6 +5,7 @@
     users:
       - matze
 #    tmux_config: "my_tmux.conf"
+#    vim_config: "my_vimrc.conf"
 
   roles:
     - {
@@ -12,7 +13,22 @@
         tags: ["tmux"],
 #        vars: { users: ["test"] },
       }
+    - {
+        role: mattfoxxx.dotfiles.vim,
+        tags: ["vim"],
+#        vars: { users: ["test"] },
+      }
 
   tasks:
-    - debug:
-        var: users
+    - name: display variables
+      debug:
+        var: 
+          - users
+          - tmux_config
+          - vim_config
+
+    - name: display post install message
+      debug:
+        msg:
+          - 'Things left to do:'
+          - '- VIM: Execute in vim :PluginInstall'

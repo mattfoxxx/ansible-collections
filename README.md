@@ -47,9 +47,9 @@ manages the dotfiles on my machines
 
 ### mattfoxxx.dotfiles.tmux
 
-var `tmux_conf` to override with custom configuration in playbook pathing, eg. `playbooks/files/my_tmux.conf` and specifying a playbook variable:
+var `tmux_config` to override with custom configuration in playbook pathing, eg. `playbooks/files/my_tmux.conf` and specifying a playbook variable:
 
 ```yaml
 vars:
-  tmux_conf: "my_tmux.conf"
+  tmux_config: "my_tmux.conf"
 ```
