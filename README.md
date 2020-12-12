@@ -36,7 +36,7 @@ ansible-galaxy collection install git+file:///~/git/ansible-collections/.git#mat
 
 ```bash
 ansible-galaxy collection install \
-git+file:///home/matze/git/ansible-dotfiles/.git#mattfoxxx/dotfiles,e8096b720611086bf2020f75879d716728b17cec
+git+file:///~/git/ansible-dotfiles/.git#mattfoxxx/dotfiles,e8096b720611086bf2020f75879d716728b17cec
 ```
 
 ## dotfiles collection
