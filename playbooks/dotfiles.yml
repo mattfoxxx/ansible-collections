@@ -1,0 +1,18 @@
+---
+- name: Install dotfiles and applications
+  hosts: all
+  vars:
+    users:
+      - matze
+#    tmux_config: "my_tmux.conf"
+
+  roles:
+    - {
+        role: mattfoxxx.dotfiles.tmux,
+        tags: ["tmux"],
+#        vars: { users: ["test"] },
+      }
+
+  tasks:
+    - debug:
+        var: users

@@ -1,0 +1,7 @@
+# allow to override role files, template or var resources
+# by suppling a source filename variable to supporting roles.
+# this is using the ansible local pathing mechanism as per:
+# https://docs.ansible.com/ansible/latest/user_guide/playbook_pathing.html
+**/templates/*
+**/vars/*
+**/files/*
