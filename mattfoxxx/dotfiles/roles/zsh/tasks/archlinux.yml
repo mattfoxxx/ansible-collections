@@ -24,6 +24,9 @@
     update: no
   with_items: "{{ users }}"
 
+- include_role:
+    name: kewlfft.aur # required. The name of the role to be executed.
+
 - name: Install Meslo font for powerlevel10k
   aur:
     name: "ttf-meslo-nerd-font-powerlevel10k"
