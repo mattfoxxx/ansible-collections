@@ -25,8 +25,7 @@
   with_items: "{{ users }}"
 
 - name: Install Meslo font for powerlevel10k
-  kewlfft.aur:
-    use: yay
+  aur:
     name: "ttf-meslo-nerd-font-powerlevel10k"
 
 - name: Install powerlevel10k with git
