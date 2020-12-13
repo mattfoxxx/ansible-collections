@@ -20,6 +20,8 @@ ansible-playbook --connection=local -l localhost -i localhost, -DC -tags tmux do
 
 ## Development hints
 
+gotcha: reference dependency roles in the collection with ansible.legacy.module_name in tasks.yml
+
 ### Remove collection locally
 
 ```bash
