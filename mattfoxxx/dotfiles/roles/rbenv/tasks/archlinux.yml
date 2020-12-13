@@ -1,0 +1,28 @@
+---
+- name: Install rbenv from aur
+  ansible.legacy.aur:
+    name: "rbenv"
+  become: yes
+  become_user: aur_builder
+
+- name: edit .zshrc
+  lineinfile:
+    line: 'eval "$(rbenv init -)"'
+    path: "/home/{{ item }}/.zshrc"
+  with_items: "{{ users }}"
+#- name: Install oh-my-zsh with git
+#  git:
+#    repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+#    dest: "/home/{{ item }}/.oh-my-zsh"
+#    depth: "1"
+#    version: master
+#    update: no
+#  with_items: "{{ users }}"
+#
+#- name: Install powerlevel10k with git
+#  git:
+#    repo: "https://github.com/romkatv/powerlevel10k.git"
+#    dest: "/home/{{ item }}/.oh-my-zsh/custom/themes/powerlevel10k"
+#    depth: "1"
+#  with_items: "{{ users }}"
+#

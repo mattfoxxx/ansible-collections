@@ -1,0 +1,14 @@
+---
+- user:
+    name: aur_builder
+    group: wheel
+    create_home: no
+    shell: /usr/bin/nologin
+  become: yes
+
+- lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+    create: yes
+    validate: "visudo -cf %s"
+  become: yes

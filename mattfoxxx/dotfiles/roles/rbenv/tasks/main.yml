@@ -1,0 +1,21 @@
+---
+# tasks file for rbenv
+
+- include_tasks: archlinux.yml
+  when: ansible_distribution == "Archlinux"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Debian"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - unbound
+#- include_tasks: redhat.yml
+#  when: ansible_os_family == "RedHat"
+#  tags:
+#    - unbound
