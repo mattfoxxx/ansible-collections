@@ -22,7 +22,7 @@
 - name: Add pyenv to .zshrc
   blockinfile:
     path: "/home/{{ item }}/.zshrc"
-    marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for PYENV -->"
     block: |
       export PYENV_ROOT="$HOME/.pyenv"
       export PATH="$PYENV_ROOT/bin:$PATH"

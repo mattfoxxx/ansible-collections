@@ -5,3 +5,6 @@
 playbooks/templates/*
 playbooks/vars/*
 playbooks/files/*
+
+.kitchen/
+__pycache__/

@@ -33,6 +33,10 @@
         role: mattfoxxx.dotfiles.pyenv,
         tags: ["pyenv"],
       }
+    - {
+        role: mattfoxxx.dotfiles.testkitchen,
+        tags: ["testkitchen"],
+      }
 
   tasks:
     - debug:

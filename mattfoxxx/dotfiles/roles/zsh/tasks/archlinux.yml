@@ -27,6 +27,8 @@
 - name: Install Meslo font for powerlevel10k
   ansible.legacy.aur:
     name: "ttf-meslo-nerd-font-powerlevel10k"
+  become: yes
+  become_user: aur_builder
 
 - name: Install powerlevel10k with git
   git:

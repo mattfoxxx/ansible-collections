@@ -1,0 +1,45 @@
+---
+# tasks file for testkitchen
+
+- include_tasks: archlinux.yml
+  when: ansible_distribution == "Archlinux"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Debian"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - unbound
+#- include_tasks: redhat.yml
+#  when: ansible_os_family == "RedHat"
+#  tags:
+#    - unbound
+
+- name: Install testinfra, paramiko within a user home directory
+  pip:
+    name:
+      - pytest-testinfra
+      - paramiko
+    extra_args: --user
+
+- name: Install latest available version of {{ kitchen_gems | join(', ') }}
+  community.general.gem:
+    name: "{{ item }}"
+    state: latest
+    user_install: yes
+  with_items: "{{ kitchen_gems }}"
+
+- name: Add ruby bin to .zshrc
+  blockinfile:
+    path: "/home/{{ item }}/.zshrc"
+    marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for TESTKITCHEN -->"
+    block: |
+      if which ruby >/dev/null && which gem >/dev/null; then
+          PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+      fi
+  with_items: "{{ users }}"

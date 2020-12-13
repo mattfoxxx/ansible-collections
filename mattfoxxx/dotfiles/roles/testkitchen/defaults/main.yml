@@ -1,0 +1,8 @@
+---
+# defaults file for testkitchen
+kitchen_gems:
+  - test-kitchen
+  - kitchen-vagrant
+  - kitchen-docker
+  - kitchen-ansible
+  - kitchen-salt
