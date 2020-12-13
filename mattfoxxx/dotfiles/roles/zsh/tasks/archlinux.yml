@@ -1,0 +1,36 @@
+---
+- name: Install zsh
+  community.general.pacman:
+    name:
+      - zsh
+      - zsh-completions
+      - zsh-autosuggestions
+      - fzf
+    state: present
+
+- name: change user shell to zsh
+  become: yes
+  user:
+    name: "{{ item }}"
+    shell: /bin/zsh
+  with_items: "{{ users }}"
+
+- name: Install oh-my-zsh with git
+  git:
+    repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+    dest: "/home/{{ item }}/.oh-my-zsh"
+    depth: "1"
+    version: master
+    update: no
+  with_items: "{{ users }}"
+
+- name: Install Meslo font for powerlevel10k
+  aur:
+    name: "ttf-meslo-nerd-font-powerlevel10k"
+
+- name: Install powerlevel10k with git
+  git:
+    repo: "https://github.com/romkatv/powerlevel10k.git"
+    dest: "/home/{{ item }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    depth: "1"
+  with_items: "{{ users }}"

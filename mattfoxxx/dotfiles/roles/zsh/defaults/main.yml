@@ -1,0 +1,8 @@
+---
+# defaults file for zsh
+users:
+  - matze
+zsh_config: "zshrc"
+zshenv_config: "zshenv"
+p10k_config: "p10k.zsh"
+#vundle: "https://github.com/VundleVim/Vundle.vim.git"

@@ -1,0 +1,48 @@
+---
+# tasks file for zsh
+
+- include_tasks: archlinux.yml
+  when: ansible_distribution == "Archlinux"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Debian"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - unbound
+#- include_tasks: redhat.yml
+#  when: ansible_os_family == "RedHat"
+#  tags:
+#    - unbound
+
+- name: copy dotfile for zsh
+  copy:
+    src: "{{ zsh_config }}"
+    dest: "/home/{{ item }}/.zshrc"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: "0644"
+  with_items: "{{ users }}"
+
+- name: copy dotfile for zshenv
+  copy:
+    src: "{{ zshenv_config }}"
+    dest: "/home/{{ item }}/.zshenv"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: "0644"
+  with_items: "{{ users }}"
+
+- name: copy dotfile for powerlevel10k
+  copy:
+    src: "{{ p10k_config }}"
+    dest: "/home/{{ item }}/.p10k.zsh"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: "0644"
+  with_items: "{{ users }}"
