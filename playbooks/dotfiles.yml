@@ -9,6 +9,10 @@
 
   roles:
     - {
+        role: mattfoxxx.dotfiles.setup,
+        tags: ["setup", "always"],
+      }
+    - {
         role: mattfoxxx.dotfiles.tmux,
         tags: ["tmux"],
 #        vars: { users: ["test"] },
@@ -20,6 +24,14 @@
     - {
         role: mattfoxxx.dotfiles.zsh,
         tags: ["zsh"],
+      }
+    - {
+        role: mattfoxxx.dotfiles.rbenv,
+        tags: ["rbenv"],
+      }
+    - {
+        role: mattfoxxx.dotfiles.pyenv,
+        tags: ["pyenv"],
       }
 
   tasks:

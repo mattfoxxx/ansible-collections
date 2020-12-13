@@ -1,0 +1,10 @@
+---
+- name: Install rbenv from aur
+  community.general.pacman:
+    name:
+      - base-devel
+      - openssl
+      - zlib
+      - xz
+      - pyenv
+    state: present

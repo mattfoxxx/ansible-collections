@@ -1,0 +1,39 @@
+---
+# tasks file for pyenv
+
+- include_tasks: archlinux.yml
+  when: ansible_distribution == "Archlinux"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Debian"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - unbound
+#- include_tasks: redhat.yml
+#  when: ansible_os_family == "RedHat"
+#  tags:
+#    - unbound
+- name: Add pyenv to .zshrc
+  blockinfile:
+    path: "/home/{{ item }}/.zshrc"
+    marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    block: |
+      export PYENV_ROOT="$HOME/.pyenv"
+      export PATH="$PYENV_ROOT/bin:$PATH"
+      if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init -)"
+      fi
+  with_items: "{{ users }}"
+
+- name: Add zsh plugin for pyenv
+  lineinfile:
+    path: "/home/{{ item }}/.zshrc"
+    insertafter: "^plugins=.*"
+    line: "    pyenv"
+  with_items: "{{ users }}"
