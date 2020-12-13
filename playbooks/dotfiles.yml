@@ -16,7 +16,10 @@
     - {
         role: mattfoxxx.dotfiles.vim,
         tags: ["vim"],
-#        vars: { users: ["test"] },
+      }
+    - {
+        role: mattfoxxx.dotfiles.zsh,
+        tags: ["zsh"],
       }
 
   tasks:
