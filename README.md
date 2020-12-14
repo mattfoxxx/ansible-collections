@@ -55,3 +55,7 @@ var `tmux_config` to override with custom configuration in playbook pathing, eg.
 vars:
   tmux_config: "my_tmux.conf"
 ```
+
+# TODO
+
+- conflicting writes to .zshrc
