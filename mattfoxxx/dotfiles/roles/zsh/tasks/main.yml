@@ -21,12 +21,11 @@
 #    - unbound
 
 - name: copy dotfile for zsh
-  copy:
-    src: "{{ zsh_config }}"
-    dest: "/home/{{ item }}/.zshrc"
-    owner: "{{ item }}"
-    group: "{{ item }}"
-    mode: "0644"
+  blockinfile:
+    path: "/home/{{ item }}/.zshrc"
+    marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for ZSHRC -->"
+    block: "{{ lookup('file', zsh_config) }}"
+    create: yes
   with_items: "{{ users }}"
 
 - name: copy dotfile for zshenv

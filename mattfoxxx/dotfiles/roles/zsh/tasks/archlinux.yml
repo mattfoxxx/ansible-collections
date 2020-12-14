@@ -3,8 +3,6 @@
   community.general.pacman:
     name:
       - zsh
-      - zsh-completions
-      - zsh-autosuggestions
       - fzf
     state: present
 
@@ -34,5 +32,26 @@
   git:
     repo: "https://github.com/romkatv/powerlevel10k.git"
     dest: "/home/{{ item }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    depth: "1"
+  with_items: "{{ users }}"
+
+- name: Install zsh-autosuggestions with git
+  git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "/home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    depth: "1"
+  with_items: "{{ users }}"
+
+- name: Install zsh-syntax-highlighting with git
+  git:
+    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    dest: "/home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    depth: "1"
+  with_items: "{{ users }}"
+
+- name: Install zsh-completions with git
+  git:
+    repo: "https://github.com/zsh-users/zsh-completions"
+    dest: "/home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-completions"
     depth: "1"
   with_items: "{{ users }}"
