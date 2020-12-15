@@ -1,5 +1,7 @@
 ---
-- name:
+- name: Install tmux and requirements
   community.general.pacman:
-    name: tmux
+    name:
+      - tmux
+      - xsel
     state: present
