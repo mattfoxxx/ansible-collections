@@ -1,5 +1,6 @@
 ---
 - name: Install ruby
+  become: true
   community.general.pacman:
     name:
       - ruby

@@ -1,5 +1,6 @@
 ---
 - name: Install tmux and requirements
+  become: true
   community.general.pacman:
     name:
       - tmux

@@ -1,5 +1,6 @@
 ---
 - name: Install terraform from aur
+  become: true
   community.general.pacman:
     name:
       - terraform
