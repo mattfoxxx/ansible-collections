@@ -4,6 +4,7 @@
     group: wheel
     create_home: no
     shell: /usr/bin/nologin
+    home: /tmp
   become: yes
 
 - lineinfile:
