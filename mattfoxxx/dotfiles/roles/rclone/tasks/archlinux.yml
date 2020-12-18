@@ -1,0 +1,7 @@
+---
+- name: Install rclone
+  become: true
+  community.general.pacman:
+    name:
+      - rclone
+    state: present

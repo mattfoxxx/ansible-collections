@@ -1,0 +1,4 @@
+---
+# defaults file for rclone
+rclone_stanza: drive
+rclone_mountpoint: drive
