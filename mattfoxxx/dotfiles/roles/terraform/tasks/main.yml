@@ -1,0 +1,39 @@
+---
+# tasks file for terraform
+
+- include_tasks: archlinux.yml
+  when: ansible_distribution == "Archlinux"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Debian"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - unbound
+#- include_tasks: redhat.yml
+#  when: ansible_os_family == "RedHat"
+#  tags:
+#    - unbound
+
+# Provider can be installed from within an main.tf from the registry
+#- name: check go version
+#  command: go version
+#  register: result
+#  changed_when: no
+#  ignore_errors: true
+
+#- set_fact:
+#    go_path: "{{ lookup('env', 'GOPATH') | default(ansible_env.HOME + '/go', true) }}"
+#  when: result is succeeded
+
+#- name: Get terraform plugins with go
+#  shell: go get -v {{ item }}
+#  environment:
+#    GOPATH: "{{ go_path }}"
+#  when: result is succeeded
+#  with_items: "{{ terraform_plugins }}"

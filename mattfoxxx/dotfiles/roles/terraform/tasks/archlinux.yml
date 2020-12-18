@@ -1,0 +1,7 @@
+---
+- name: Install terraform from aur
+  community.general.pacman:
+    name:
+      - terraform
+      - terragrunt
+    state: present

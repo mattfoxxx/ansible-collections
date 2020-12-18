@@ -1,0 +1,7 @@
+---
+- name: Install golang from aur
+  community.general.pacman:
+    name:
+      - go
+      - go-tools
+    state: present

@@ -1,6 +1,7 @@
 ---
 - name: Install dotfiles and applications
   hosts: all
+  remote_user: matze
   vars:
     users:
       - matze
@@ -36,6 +37,14 @@
     - {
         role: mattfoxxx.dotfiles.testkitchen,
         tags: ["testkitchen"],
+      }
+    - {
+        role: mattfoxxx.dotfiles.golang,
+        tags: ["golang", "devops"],
+      }
+    - {
+        role: mattfoxxx.dotfiles.terraform,
+        tags: ["terraform", "devops"],
       }
 
   tasks:

@@ -1,0 +1,5 @@
+---
+# defaults file for terraform
+terraform_plugins:
+  - github.com/Telmate/terraform-provider-proxmox/cmd/terraform-provider-proxmox
+  - github.com/Telmate/terraform-provider-proxmox/cmd/terraform-provisioner-proxmox

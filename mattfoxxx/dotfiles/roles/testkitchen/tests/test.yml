@@ -1,12 +1,15 @@
 ---
 - hosts: localhost
-  remote_user: root
+  remote_user: vagrant
   vars:
     users:
       - vagrant
   roles:
     - setup
+    - vim
     - zsh
     - rbenv
     - pyenv
     - testkitchen
+    - golang
+    - terraform

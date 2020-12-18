@@ -1,0 +1,29 @@
+---
+# tasks file for golang
+
+- include_tasks: archlinux.yml
+  when: ansible_distribution == "Archlinux"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Debian"
+  tags:
+    - unbound
+
+- include_tasks: debian.yml
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - unbound
+#- include_tasks: redhat.yml
+#  when: ansible_os_family == "RedHat"
+#  tags:
+#    - unbound
+- name: Add golang to .zshrc
+  blockinfile:
+    path: "/home/{{ item }}/.zshrc"
+    marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for GOLANG -->"
+    block: |
+      # enable go binaries
+      export PATH="$PATH:$HOME/go/bin"
+  with_items: "{{ users }}"
