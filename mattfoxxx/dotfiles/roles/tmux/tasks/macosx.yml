@@ -10,7 +10,7 @@
     src: "{{ tmux_config }}"
     dest: "/Users/{{ item }}/.tmux.conf"
     owner: "{{ item }}"
-    group: "{{ item }}"
+    group: "staff"
     mode: "0644"
   with_items: "{{ users }}"
 
