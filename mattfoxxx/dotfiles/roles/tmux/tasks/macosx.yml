@@ -3,3 +3,20 @@
   community.general.homebrew:
     name: tmux
     state: present
+
+
+- name: Add configuration for tmux
+  copy:
+    src: "{{ tmux_config }}"
+    dest: "/Users/{{ item }}/.tmux.conf"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: "0644"
+  with_items: "{{ users }}"
+
+- name: Install tmux plugin manager with git
+  git:
+    repo: "https://github.com/tmux-plugins/tpm"
+    dest: "/Users/{{ item }}/.tmux/plugins/tpm"
+    update: yes
+  with_items: "{{ users }}"
