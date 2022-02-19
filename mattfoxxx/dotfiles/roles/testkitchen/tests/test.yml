@@ -5,6 +5,7 @@
     users:
       - vagrant
   roles:
+    - rclone
     - setup
     - vim
     - zsh

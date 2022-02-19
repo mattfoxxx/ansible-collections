@@ -46,15 +46,22 @@
         role: mattfoxxx.dotfiles.terraform,
         tags: ["terraform", "devops"],
       }
+    - {
+        role: mattfoxxx.dotfiles.rclone,
+        tags: ["rclone", "shell"],
+      }
 
   tasks:
-    - debug:
+    - name: Debug users var
+      debug:
         var: users
       tags: debug
-    - debug:
+    - name: Debug tmux_config var
+      debug:
         var: tmux_config
       tags: debug
-    - debug:
+    - name: Debug vim_config var
+      debug:
         var: vim_config
       tags: debug
 
@@ -63,5 +70,7 @@
         msg:
           - 'Things left to do:'
           - '- VIM: Execute in vim :PluginInstall'
+          - '- RCLONE: `rclone config` and follow the steps'
+          - '  RCLONE: `systemctl --user start rclone.service`'
       tags:
         - always
