@@ -3,6 +3,4 @@ collections:
   - name: https://github.com/mattfoxxx/ansible-collections.git#mattfoxxx/dotfiles
     type: git
     #version: "f0b0869339dd1034614d3067e5135a2e1a925614"
-
-roles:
-  - src: kewlfft.aur
+  - name: kewlfft.aur

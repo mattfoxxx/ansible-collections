@@ -59,3 +59,35 @@ vars:
 # TODO
 
 - conflicting writes to .zshrc
+## Missing Packages
+### fonts-firacode
+```bash
+mkdir -p ~/.local/share/fonts
+```
+```bash
+cd ~/.local/share/fonts && curl -fLo "Fira Code Regular Nerd Font Complete Mono.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf
+```
+```bash
+cd ~/.local/share/fonts && curl -fLo "Fira Code Regular Nerd Font Complete.ttf"  https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf?raw=true
+```
+`fc-cache -rv` will rebuild font cache. `fc-list` lets you check the correct names for the font. `FiraCode Nerd Font` and `FiraCode Nerd Font Mono` for the just downloaded font.
+
+#### Setup for chromebooks
+In the terminal:
+1. Use the keyboard shortcut <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>J</kbd> to open the JavaScript Console.
+2. Copy & paste the following 3 commands:
+```
+term_.prefs_.set('font-family', '"Fira Code", Cousine, "Roboto Mono", "Source Code Pro", monospace');
+term_.prefs_.set('user-css-text', "x-row { font-feature-settings: 'liga', 'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07'; text-rendering: optimizeLegibility; }")
+term_.prefs_.set('user-css', 'https://cdn.jsdelivr.net/npm/firacode@latest/distr/fira_code.min.css')
+```
+
+Note: The values for font-feature-settings can be tuned to your preference. For more details see the documentation at [stylistic sets](./How-to-enable-stylistic-sets)
+
+chrome os setup from https://github.com/tonsky/FiraCode/wiki/ChromeOS-Terminal
+
+### weechat and dependencies
+### terraform
+### kubectl
+### lynx
+### custom scripts in `~/.local/bin` - change `$PATH` accordingly
