@@ -8,7 +8,7 @@
     state: present
 
 - name: Install rbenv from aur
-  ansible.legacy.aur:
+  kewlfft.aur.aur:
     name: "rbenv"
   become: true
   become_user: aur_builder

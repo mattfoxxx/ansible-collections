@@ -24,7 +24,7 @@
   with_items: "{{ users }}"
 
 - name: Install Meslo font for powerlevel10k
-  ansible.legacy.aur:
+  kewlfft.aur.aur:
     name:
       - "ttf-meslo-nerd-font-powerlevel10k"
       - "direnv"
