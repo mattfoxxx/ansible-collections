@@ -1,0 +1,14 @@
+---
+- name: Install zsh packages
+  become: true
+  community.general.pacman:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ zsh_packages }}"
+
+- name: Install fonts and tools from aur
+  kewlfft.aur.aur:
+    name: "{{ item }}"
+  become: true
+  become_user: aur_builder
+  with_items: "{{ zsh_aur_packages }}"

@@ -1,0 +1,9 @@
+---
+__zsh_packages:
+  - zsh
+  - fzf
+
+zsh_aur_packages: 
+  - "nerd-fonts-fira-code"
+  - "ttf-meslo-nerd-font-powerlevel10k"
+  - "direnv"

@@ -1,24 +1,71 @@
 ---
 # tasks file for zsh
+- include_tasks: variables.yml
 
-- include_tasks: archlinux.yml
-  when: ansible_distribution == "Archlinux"
+
+- name: Include os specific tasks
+  include_tasks: "{{ distro_item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+#    - default.yaml
+  loop_control:
+    loop_var: distro_item
   tags:
     - unbound
 
-- include_tasks: debian.yml
-  when: ansible_distribution == "Debian"
-  tags:
-    - unbound
+- name: change user shell to zsh
+  become: true
+  user:
+    name: "{{ item }}"
+    shell: /bin/zsh
+  with_items: "{{ users }}"
 
-- include_tasks: debian.yml
-  when: ansible_distribution == "Ubuntu"
-  tags:
-    - unbound
-#- include_tasks: redhat.yml
-#  when: ansible_os_family == "RedHat"
-#  tags:
-#    - unbound
+- name: Install oh-my-zsh with git
+  git:
+    repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+    dest: "/home/{{ item }}/.oh-my-zsh"
+    depth: "1"
+    version: master
+    update: no
+  diff: false
+  with_items: "{{ users }}"
+
+- name: Install powerlevel10k with git
+  git:
+    repo: "https://github.com/romkatv/powerlevel10k.git"
+    dest: "/home/{{ item }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    depth: "1"
+    version: "master"
+  diff: false
+  with_items: "{{ users }}"
+
+- name: Install zsh-autosuggestions with git
+  git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "/home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    depth: "1"
+    version: master
+  diff: false
+  with_items: "{{ users }}"
+
+- name: Install zsh-syntax-highlighting with git
+  git:
+    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    dest: "/home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    depth: "1"
+    version: master
+  diff: false
+  with_items: "{{ users }}"
+
+- name: Install zsh-completions with git
+  git:
+    repo: "https://github.com/zsh-users/zsh-completions"
+    dest: "/home/{{ item }}/.oh-my-zsh/custom/plugins/zsh-completions"
+    depth: "1"
+    version: master
+  diff: false
+  with_items: "{{ users }}"
 
 - name: copy dotfile for zsh
   blockinfile:
@@ -26,6 +73,7 @@
     marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for ZSHRC -->"
     block: "{{ lookup('file', zsh_config) }}"
     create: yes
+    mode: "0644"
   with_items: "{{ users }}"
 
 - name: copy dotfile for zshenv
