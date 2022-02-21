@@ -12,6 +12,7 @@
     - {
         role: mattfoxxx.dotfiles.setup,
         tags: ["setup", "always"],
+        when: ansible_distribution == "Archlinux"
       }
     - {
         role: mattfoxxx.dotfiles.tmux,
