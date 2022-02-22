@@ -2,6 +2,10 @@
 # defaults file for zsh
 users:
   - matze
+nerd_fonts_release: "2.2.0-RC"
+nerd_fonts:
+  - { zipfile: "FiraCode", name: "Fira Code" }
+  - { zipfile: "Iosevka", name: "Iosevka" }
 zsh_config: "zshrc"
 zshenv_config: "zshenv"
 p10k_config: "p10k.zsh"

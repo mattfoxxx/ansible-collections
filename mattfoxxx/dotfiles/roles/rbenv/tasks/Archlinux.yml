@@ -1,0 +1,14 @@
+---
+- name: Install rbenv dependencies
+  become: true
+  community.general.pacman:
+    name:
+      - ruby
+      - rubygems
+    state: present
+
+- name: Install rbenv from aur
+  kewlfft.aur.aur:
+    name: "rbenv"
+  become: true
+  become_user: aur_builder

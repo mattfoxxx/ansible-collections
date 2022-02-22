@@ -1,0 +1,7 @@
+---
+- name: Install rbenv
+  become: true
+  ansible.builtin.package:
+    name:
+      - rbenv
+    state: present

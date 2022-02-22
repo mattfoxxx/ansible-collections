@@ -8,7 +8,7 @@
   with_first_found:
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
-#    - default.yaml
+    - default.yml
   loop_control:
     loop_var: distro_item
   tags:
@@ -67,12 +67,23 @@
   diff: false
   with_items: "{{ users }}"
 
+- name: change ownership of .oh-my-zsh
+  file:
+    path: "/home/{{ item }}/.oh-my-zsh"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    state: directory
+    recurse: yes
+  with_items: "{{ users }}"
+
 - name: copy dotfile for zsh
   blockinfile:
     path: "/home/{{ item }}/.zshrc"
     marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for ZSHRC -->"
     block: "{{ lookup('file', zsh_config) }}"
     create: yes
+    owner: "{{ item }}"
+    group: "{{ item }}"
     mode: "0644"
   with_items: "{{ users }}"
 
@@ -84,6 +95,7 @@
     group: "{{ item }}"
     mode: "0644"
   with_items: "{{ users }}"
+  when: ansible_distribution != "MacOSX"
 
 - name: copy dotfile for powerlevel10k
   copy:

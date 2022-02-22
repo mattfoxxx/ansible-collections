@@ -1,4 +1,6 @@
 ---
 # defaults file for rclone
+users:
+  - matze
 rclone_stanza: drive
 rclone_mountpoint: drive

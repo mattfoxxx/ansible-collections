@@ -7,5 +7,5 @@
       - openssl
       - zlib
       - xz
-      - pyenv
     state: present
+

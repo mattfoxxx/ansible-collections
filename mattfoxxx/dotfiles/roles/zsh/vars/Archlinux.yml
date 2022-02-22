@@ -2,6 +2,7 @@
 __zsh_packages:
   - zsh
   - fzf
+  - noto-fonts-emoji
 
 zsh_aur_packages: 
   - "nerd-fonts-fira-code"
