@@ -90,7 +90,7 @@
 
 - name: Add pyenv to .profile
   blockinfile:
-    path: "/home/{{ item }}/zprofile"
+    path: "/home/{{ item }}/.profile"
     create: true
     owner: "{{ item }}"
     group: "{{ item }}"
