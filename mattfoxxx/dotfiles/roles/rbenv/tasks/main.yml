@@ -1,14 +1,5 @@
 ---
 # tasks file for rbenv
-- name: Install ruby-build with git
-  git:
-    repo: "https://github.com/rbenv/ruby-build.git"
-    dest: "/home/{{ item }}/.rbenv/plugins/ruby-build"
-    depth: "1"
-    version: master
-  diff: false
-  with_items: "{{ users }}"
-
 - name: Include os specific tasks
   include_tasks: "{{ distro_item }}"
   with_first_found:
@@ -19,6 +10,15 @@
     loop_var: distro_item
   tags:
     - unbound
+
+- name: Install ruby-build with git
+  git:
+    repo: "https://github.com/rbenv/ruby-build.git"
+    dest: "/home/{{ item }}/.rbenv/plugins/ruby-build"
+    depth: "1"
+    version: master
+  diff: false
+  with_items: "{{ users }}"
 
 - name: edit .zshrc
   lineinfile:
