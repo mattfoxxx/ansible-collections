@@ -56,10 +56,22 @@ vars:
   tmux_config: "my_tmux.conf"
 ```
 
-# TODO
+## TODO
 
+## Bugs / Improvements
+- remove stupid users array and replace with simple variable
 - conflicting writes to .zshrc
+- Document testing configuration
+- write more tests!!
+
 ## Missing Packages
+- weechat and dependencies
+- kubectl
+- lynx
+- custom scripts in `~/.local/bin` - change `$PATH` accordingly
+- alacritty
+
+## Configuration Hints
 ### fonts-firacode
 ```bash
 mkdir -p ~/.local/share/fonts
@@ -86,8 +98,3 @@ Note: The values for font-feature-settings can be tuned to your preference. For 
 
 chrome os setup from https://github.com/tonsky/FiraCode/wiki/ChromeOS-Terminal
 
-### weechat and dependencies
-### terraform
-### kubectl
-### lynx
-### custom scripts in `~/.local/bin` - change `$PATH` accordingly

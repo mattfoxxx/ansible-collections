@@ -1,0 +1,17 @@
+---
+- name: Install golang from aur
+  become: true
+  community.general.pacman:
+    name:
+      - go
+      - go-tools
+    state: present
+
+- name: Add golang to .zshrc
+  blockinfile:
+    path: "/home/{{ item }}/.zshrc"
+    marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for GOLANG -->"
+    block: |
+      # enable go binaries
+      export PATH="$PATH:$HOME/go/bin"
+  with_items: "{{ users }}"

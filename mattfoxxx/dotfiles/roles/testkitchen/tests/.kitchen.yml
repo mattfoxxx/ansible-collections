@@ -1,19 +1,23 @@
 ---
 driver:
   name: vagrant
+  cachier: true
 
 provisioner:
   name: ansible_playbook
   hosts: all
-  require_ansible_repo: true
+  require_ansible_repo: false
+  require_pip3: true
+  ansible_version: latest
+  ansible_binary_path: /usr/local/bin
   require_ansible_omnibus: false
   ansible_verbose: true
-  ansible_verbosity: 1
+  ansible_verbosity: 2
   ansible_diff: true
   roles_path: ../../../roles
   playbook: ./test.yml
   require_chef_for_busser: false
-  requirements_path: requirements.yml
+  requirements_path: ./requirements.yml
 
 verifier:
   name: shell
@@ -23,12 +27,13 @@ verifier:
     "test/integration/${KITCHEN_SUITE}"
 
 platforms:
-  - name: archlinux/archlinux
-    lifecycle:
-      post_create:
-        #- remote: sudo pacman -Syuq --noconfirm
-        - remote: sudo pacman -Syq --noconfirm --needed python python-pip which git base-devel ansible ansible-base sshpass
-        #- remote: sudo pip3 install ansible
+  - name: bento/ubuntu-20.04
+#  - name: archlinux/archlinux
+#    lifecycle:
+#      post_create:
+#        #- remote: sudo pacman -Syuq --noconfirm
+#        - remote: sudo pacman -Syq --noconfirm --needed python python-pip which git base-devel ansible ansible-base sshpass
+#        #- remote: sudo pip3 install ansible
 
 suites:
   - name: default

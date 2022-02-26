@@ -1,8 +1,8 @@
 ---
-- name: Install golang from aur
+- name: Install tmux and requirements
   become: true
   community.general.pacman:
     name:
-      - go
-      - go-tools
+      - tmux
+      - xsel
     state: present

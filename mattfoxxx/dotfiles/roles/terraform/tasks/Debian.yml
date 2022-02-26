@@ -1,0 +1,33 @@
+---
+- name: Get os architecture for apt url
+  command: dpkg --print-architecture
+  args:
+    executable: /bin/bash
+  register: os_architecture
+
+- name: Debug variable os_architecture
+  ansible.builtin.debug:
+    var: os_architecture
+    verbosity: 2
+
+- name: Add an Apt signing key for hashicorp ppa
+  ansible.builtin.apt_key:
+    url: https://apt.releases.hashicorp.com/gpg
+    state: present
+
+- name: Add specified repository into sources list
+  ansible.builtin.apt_repository:
+    repo: "deb [arch={{ os_architecture.stdout }}] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+    state: present
+
+- name: Install terraform binary
+  ansible.builtin.package:
+    name: terraform
+    state: present
+
+- name: Download and install terragrunt binary
+  ansible.builtin.get_url:
+    url: https://github.com/gruntwork-io/terragrunt/releases/download/v0.36.2/terragrunt_linux_amd64
+    dest: /usr/local/bin/terragrunt
+    checksum: sha256:https://github.com/gruntwork-io/terragrunt/releases/download/v0.36.2/SHA256SUMS
+    mode: '0755'

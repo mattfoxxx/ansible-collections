@@ -1,21 +1,37 @@
 ---
 # tasks file for tmux
-- include_tasks: archlinux.yml
-  when: ansible_distribution == "Archlinux"
+- name: Include os specific tasks
+  include_tasks: "{{ distro_item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - default.yml
+  loop_control:
+    loop_var: distro_item
   tags:
     - unbound
 
-- include_tasks: debian.yml
-  when: ansible_distribution == "Debian"
-  tags:
-    - unbound
+- name: Add configuration for tmux
+  copy:
+    src: "{{ tmux_config }}"
+    dest: "/home/{{ item }}/.tmux.conf"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: "0644"
+  with_items: "{{ users }}"
 
-- include_tasks: debian.yml
-  when: ansible_distribution == "Ubuntu"
-  tags:
-    - unbound
+- name: Install tmux plugin manager with git
+  git:
+    repo: "https://github.com/tmux-plugins/tpm"
+    dest: "/home/{{ item }}/.tmux/plugins/tpm"
+    update: yes
+  with_items: "{{ users }}"
 
-- include_tasks: macosx.yml
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - unbound
+- name: change ownership of .pyenv
+  file:
+    path: "/home/{{ item }}/.tmux"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    state: directory
+    recurse: yes
+  with_items: "{{ users }}"

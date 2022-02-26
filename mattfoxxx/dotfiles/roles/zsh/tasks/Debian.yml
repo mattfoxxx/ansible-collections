@@ -1,0 +1,46 @@
+---
+- name: Install zsh packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ zsh_packages }}"
+
+
+- name: Check if fonts are already installed
+  ansible.builtin.shell: |
+    set -o pipefail
+    fc-list | grep -i "{{ item.name }}"
+  args:
+    executable: /bin/bash
+  with_items: "{{ nerd_fonts }}"
+  failed_when: fonts_missing.rc == 2
+  changed_when: fonts_missing.rc == 1
+  register: fonts_missing
+
+- name: Debug variable fonts_missing
+  debug:
+    var: fonts_missing
+    verbosity: 2
+
+- name: Unarchive fonts that needs to be downloaded
+  ansible.builtin.unarchive:
+    src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts_release }}/{{ item.item.zipfile }}.zip"
+    dest: /usr/local/share/fonts/
+    remote_src: yes
+  with_items: "{{ fonts_missing.results }}"
+  when: item.rc != 0
+  register: nerd_fonts_installed
+
+- name: Debug variable nerd_fonts_installed
+  debug:
+    var: nerd_fonts_installed
+    verbosity: 2
+
+- name: Run fc-cache only if fonts were installed
+  ansible.builtin.command: fc-cache -f
+  args:
+    executable: /bin/bash
+  changed_when: nerd_fonts_installed.changed
+  when: nerd_fonts_installed.changed
+

@@ -1,12 +1,12 @@
 ---
 - name: Load a variable file based on the OS type, or a default if not found.
-  include_vars: "{{ item }}"
+  include_vars: 
+    file: "{{ item }}"
   with_first_found:
-    - "{{ ansible_distribution }}.yml"
-    - "{{ ansible_os_family }}.yml"
-    - default.yml
+      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_os_family }}.yml"
 
 - name: Define packages
   set_fact:
     zsh_packages: "{{ __zsh_packages | list }}"
-  when: zsh_packages is not defined
+  when: (__zsh_packages is defined) and (zsh_packages is not defined)

@@ -6,3 +6,4 @@ kitchen_gems:
   - kitchen-docker
   - kitchen-ansible
   - kitchen-salt
+ruby_version: 3.0.3

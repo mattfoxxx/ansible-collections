@@ -4,9 +4,14 @@
   vars:
     users:
       - vagrant
+  collections:
+    - community.general
   roles:
+    - {
+        role: setup,
+        when: ansible_distribution == "Archlinux"
+      }
     - rclone
-    - setup
     - vim
     - zsh
     - rbenv
@@ -14,3 +19,4 @@
     - testkitchen
     - golang
     - terraform
+    - tmux

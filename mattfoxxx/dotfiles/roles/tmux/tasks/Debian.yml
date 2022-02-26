@@ -1,0 +1,5 @@
+---
+- name: Install tmux with brew
+  ansible.builtin.package:
+    name: tmux
+    state: present

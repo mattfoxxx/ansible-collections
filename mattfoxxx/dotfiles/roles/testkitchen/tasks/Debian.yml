@@ -1,0 +1,17 @@
+---
+- name: Check if ruby {{ ruby_version }} already exists
+  stat:
+    path: /home/{{ item }}/.rbenv/versions/{{ ruby_version }}
+  register: ruby_installed
+  with_items: "{{ users }}"
+
+- name: Debug ruby_installed variable
+  debug:
+    var: ruby_installed
+    verbosity: 1
+
+- name: Install ruby {{ ruby_version }} via rbenv
+  command: rbenv install "{{ ruby_version }}"
+  args:
+    executable: /bin/bash
+  when: (ruby_installed.results[0].stat.exists | bool) == false

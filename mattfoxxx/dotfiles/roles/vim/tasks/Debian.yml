@@ -1,8 +1,6 @@
 ---
-- name: Install rbenv
+- name: Install vim with pacman
   become: true
   ansible.builtin.package:
-    name:
-      - rbenv
-      - ruby-dev
+    name: vim
     state: present
