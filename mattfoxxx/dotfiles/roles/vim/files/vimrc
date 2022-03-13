@@ -59,6 +59,12 @@ else
 	Plugin 'micha/vim-colors-solarized'
     Plugin 'sickill/vim-monokai'
     Plugin 'ctrlpvim/ctrlp.vim'
+    Plugin 'python-mode/python-mode'
+    Plugin 'preservim/vimux'
+    Plugin 'dense-analysis/ale'
+    Plugin 'ycm-core/YouCompleteMe'
+    Plugin 'arcticicestudio/nord-vim'
+    Plugin 'PsychoLlama/teleport.vim'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
@@ -174,6 +180,36 @@ inoremap <C-d> <esc>:wq!<cr>               " save and exit
 nnoremap <C-d> :wq!<cr>
 inoremap <C-q> <esc>:qa!<cr>               " quit discarding changes
 nnoremap <C-q> :qa!<cr>
+
+" Split windows
+nmap ss :split<cr>
+nmap sv :vsplit<cr>
+
+" Make Y behave like D and C
+nnoremap Y y$
+
+" Keep cursor centered on certain movements
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ'z
+
+" Undo break points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+" Jumplist mutations
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+
+" Moving text
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+inoremap <C-j> :m .+1<CR>==
+inoremap <C-k> :m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
 
 "Completion
  set wildmode=list:longest
@@ -338,3 +374,8 @@ let g:livedown_browser = "firefox"
 " nnoremap [1;5C W
 " set t_Co=256
 " set term=xterm-256color
+
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0
+let g:ycm_python_binary_path='/usr/bin/python3'
