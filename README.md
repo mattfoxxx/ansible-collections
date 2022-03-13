@@ -70,6 +70,7 @@ vars:
 - lynx
 - custom scripts in `~/.local/bin` - change `$PATH` accordingly
 - alacritty
+- bpython
 
 ## Configuration Hints
 ### fonts-firacode

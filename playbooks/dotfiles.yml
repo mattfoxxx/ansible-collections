@@ -70,7 +70,8 @@
       debug:
         msg:
           - 'Things left to do:'
-          - '- VIM: Execute in vim :PluginInstall'
+          - '- TMUX:   use `prefix+I` to install plugins'
+          - '- VIM:    Execute in vim :PluginInstall'
           - '- RCLONE: `rclone config` and follow the steps'
           - '  RCLONE: `systemctl --user start rclone.service`'
       tags:
