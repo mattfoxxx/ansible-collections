@@ -35,17 +35,26 @@
 
 
 - name: copy lua dir for nvim
-  copy:
+  synchronize:
     src: "{{ nvim_lua_dir }}"
     dest: "/home/{{ item }}/.config/nvim/lua/"
     owner: "{{ item }}"
     group: "{{ item }}"
-    mode: "0644"
-    remote_src: yes
-    directory_mode: yes
+    recursive: yes
   with_items: "{{ users }}"
 
-- name: Create lua directory if it does not exist
+    #- name: copy lua dir for nvim
+    #  copy:
+    #    src: "{{ nvim_lua_dir }}"
+    #    dest: "/home/{{ item }}/.config/nvim/lua/"
+    #    owner: "{{ item }}"
+    #    group: "{{ item }}"
+    #    mode: "0644"
+    #    remote_src: yes
+    #    directory_mode: yes
+    #  with_items: "{{ users }}"
+
+- name: Create vim plug directory if it does not exist
   become: true
   ansible.builtin.file:
     path: "/home/{{ item }}/.local/share/nvim/site/autoload/"
