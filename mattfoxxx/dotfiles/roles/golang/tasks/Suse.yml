@@ -1,5 +1,5 @@
 ---
-- name: Install golang from aur
+- name: Install golang package
   become: true
   ansible.builtin.package:
     name:
