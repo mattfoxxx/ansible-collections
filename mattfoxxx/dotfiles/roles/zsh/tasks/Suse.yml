@@ -27,8 +27,10 @@
   become: true
   ansible.builtin.file:
     path: /usr/local/share/fonts/
+    owner: root
+    group: users
     state: directory
-    mode: '0755'
+    mode: '0775'
 
 - name: Unarchive fonts that needs to be downloaded
   ansible.builtin.unarchive:
