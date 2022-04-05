@@ -24,6 +24,7 @@
     verbosity: 2
 
 - name: Create a directory if it does not exist
+  become: true
   ansible.builtin.file:
     path: /usr/local/share/fonts/
     state: directory
