@@ -38,8 +38,6 @@
   synchronize:
     src: "{{ nvim_lua_dir }}"
     dest: "/home/{{ item }}/.config/nvim/lua/"
-    owner: "{{ item }}"
-    group: "{{ item }}"
     recursive: yes
   with_items: "{{ users }}"
 
