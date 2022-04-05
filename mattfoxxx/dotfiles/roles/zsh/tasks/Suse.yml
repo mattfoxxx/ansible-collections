@@ -23,6 +23,12 @@
     var: fonts_missing
     verbosity: 2
 
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /usr/local/share/fonts/
+    state: directory
+    mode: '0755'
+
 - name: Unarchive fonts that needs to be downloaded
   ansible.builtin.unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts_release }}/{{ item.item.zipfile }}.zip"
