@@ -29,7 +29,7 @@
     path: "/home/{{ item }}/.config/nvim/lua"
     owner: "{{ item }}"
     group: "{{ item }}"
-    mode: "0755"
+    mode: "0750"
     state: directory
   with_items: "{{ users }}"
 
@@ -58,7 +58,7 @@
     path: "/home/{{ item }}/.local/share/nvim/site/autoload/"
     owner: "{{ item }}"
     group: "{{ item }}"
-    mode: "0755"
+    mode: "0750"
     state: directory
   with_items: "{{ users }}"
 

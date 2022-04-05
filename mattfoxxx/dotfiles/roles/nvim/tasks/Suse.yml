@@ -1,5 +1,5 @@
 ---
-- name: Install vim with pacman
+- name: Install vim with zypper
   become: true
   ansible.builtin.package:
     name: neovim
