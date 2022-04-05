@@ -4,4 +4,5 @@
 users:
   - matze
 vim_config: "vimrc"
+vim_keybinds: "vimrc.keybinds"
 vundle: "https://github.com/VundleVim/Vundle.vim.git"
