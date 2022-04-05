@@ -24,6 +24,10 @@
         tags: ["vim"],
       }
     - {
+        role: mattfoxxx.dotfiles.nvim,
+        tags: ["nvim"],
+      }
+    - {
         role: mattfoxxx.dotfiles.zsh,
         tags: ["zsh"],
       }

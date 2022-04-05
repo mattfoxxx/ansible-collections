@@ -1,0 +1,8 @@
+---
+# defaults file for vim
+# clone vundle to bundle directory ~/.vim/bundle/Vundle.vim
+users:
+  - matze
+nvim_config: "init.vim"
+nvim_lua_dir: "lua"
+vundle: "https://github.com/VundleVim/Vundle.vim.git"
