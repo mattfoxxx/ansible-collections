@@ -6,4 +6,4 @@ __zsh_packages:
   - zsh
   - fzf
   - fontconfig
-  - fonts-noto-color-emoji
+  - noto-coloremoji-fonts
