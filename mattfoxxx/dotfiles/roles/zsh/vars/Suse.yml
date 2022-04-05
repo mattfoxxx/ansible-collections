@@ -5,5 +5,6 @@ __zsh_packages:
   - direnv
   - zsh
   - fzf
+  - fzf-zsh-completion
   - fontconfig
   - noto-coloremoji-fonts
