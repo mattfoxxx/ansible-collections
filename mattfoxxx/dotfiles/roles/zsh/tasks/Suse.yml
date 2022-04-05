@@ -28,11 +28,12 @@
   ansible.builtin.file:
     path: /usr/local/share/fonts/
     owner: root
-    group: users
+    group: root
     state: directory
-    mode: '0775'
+    mode: '0755'
 
 - name: Unarchive fonts that needs to be downloaded
+  become: true
   ansible.builtin.unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts_release }}/{{ item.item.zipfile }}.zip"
     dest: /usr/local/share/fonts/
