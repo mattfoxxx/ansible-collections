@@ -1,0 +1,16 @@
+---
+- name: Install rbenv
+  become: true
+  ansible.builtin.package:
+    name:
+      - ruby
+    state: present
+
+
+- name: Install ruby devel pattern
+  become: true
+  ansible.builtin.package:
+    name:
+      - ruby_devel
+    state: present
+    type: pattern
