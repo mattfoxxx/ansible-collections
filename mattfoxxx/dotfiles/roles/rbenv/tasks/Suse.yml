@@ -1,5 +1,6 @@
 ---
 - name: Add ruby devel repo
+  become: true
   community.general.zypper_repository:
     repo: 'https://download.opensuse.org/repositories/devel:languages:ruby:extensions/openSUSE_Tumbleweed/devel:languages:ruby:extensions.repo'
     state: present
