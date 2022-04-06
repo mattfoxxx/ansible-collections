@@ -22,7 +22,7 @@
     GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
   with_items: "{{ users }}"
   when:
-    ansible_facts["ansible_os_family"] != "Suse"
+    ansible_facts["os_family"] != "Suse"
 
 - name: edit .zshrc
   lineinfile:
