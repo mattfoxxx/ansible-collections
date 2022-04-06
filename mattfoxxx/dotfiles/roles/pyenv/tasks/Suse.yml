@@ -3,7 +3,8 @@
   become: true
   ansible.builtin.package:
     name:
-      - base-devel
+      - devel-basis
+      - devel-python3
     state: present
     type: pattern
 
