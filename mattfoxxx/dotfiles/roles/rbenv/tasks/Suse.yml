@@ -11,6 +11,6 @@
   become: true
   ansible.builtin.package:
     name:
-      - ruby_devel
+      - devel_ruby
     state: present
     type: pattern
