@@ -1,0 +1,19 @@
+---
+- name: Install base-devel pattern
+  become: true
+  ansible.builtin.package:
+    name:
+      - base-devel
+    state: present
+    type: pattern
+
+- name: Install pyenv dependencies
+  become: true
+  ansible.builtin.package:
+    name:
+      - base-devel
+      - openssl
+      - zlib-devel
+      - xz
+    state: present
+
