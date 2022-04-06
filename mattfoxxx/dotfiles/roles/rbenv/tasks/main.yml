@@ -18,6 +18,8 @@
     depth: "1"
     version: master
   diff: false
+  environment:
+    GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
   with_items: "{{ users }}"
 
 - name: edit .zshrc
