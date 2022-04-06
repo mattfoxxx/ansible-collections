@@ -2,7 +2,6 @@
 - name: Add ruby devel repo
   community.general.zypper_repository:
     repo: 'https://download.opensuse.org/repositories/devel:languages:ruby:extensions/openSUSE_Tumbleweed/devel:languages:ruby:extensions.repo'
-    name: devel_ruby
     state: present
     runrefresh: yes
 
