@@ -1,5 +1,5 @@
 ---
-- name: Install base-devel pattern
+- name: Install patterns
   become: true
   ansible.builtin.package:
     name:
@@ -12,7 +12,6 @@
   become: true
   ansible.builtin.package:
     name:
-      - base-devel
       - openssl
       - zlib-devel
       - xz
