@@ -4,6 +4,7 @@
   ansible.builtin.package:
     name:
       - ruby
+      - ruby-devel
     state: present
 
 
