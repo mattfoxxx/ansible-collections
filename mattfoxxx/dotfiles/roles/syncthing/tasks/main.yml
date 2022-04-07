@@ -1,0 +1,31 @@
+---
+# tasks file for syncthing
+- name: Include os specific tasks
+  include_tasks: "{{ distro_item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - default.yml
+  loop_control:
+    loop_var: distro_item
+  tags:
+    - unbound
+
+      #- name: Install ruby-build with git
+      #  git:
+      #    repo: "https://github.com/rbenv/ruby-build.git"
+      #    dest: "/home/{{ item }}/.rbenv/plugins/ruby-build"
+      #    depth: "1"
+      #    version: master
+      #  diff: false
+      #  environment:
+      #    GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
+      #  with_items: "{{ users }}"
+      #  when:
+      #    ansible_facts["os_family"] != "Suse"
+      #
+      #- name: edit .zshrc
+      #  lineinfile:
+      #    line: 'eval "$(rbenv init -)"'
+      #    path: "/home/{{ item }}/.zshrc"
+      #  with_items: "{{ users }}"

@@ -1,0 +1,9 @@
+---
+- name: Install syncthing
+  become: true
+  community.general.pacman:
+    name:
+      - syncthing
+      - rubygems
+    state: present
+
