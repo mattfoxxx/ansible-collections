@@ -36,6 +36,10 @@
         tags: ["rbenv"],
       }
     - {
+        role: mattfoxxx.dotfiles.syncthing,
+        tags: ["syncthing"],
+      }
+    - {
         role: mattfoxxx.dotfiles.pyenv,
         tags: ["pyenv"],
       }
