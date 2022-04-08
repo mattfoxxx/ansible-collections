@@ -1,0 +1,12 @@
+---
+- name: Install terraform binary
+  ansible.builtin.package:
+    name: terraform
+    state: present
+
+- name: Download and install terragrunt binary
+  ansible.builtin.get_url:
+    url: https://github.com/gruntwork-io/terragrunt/releases/download/v0.36.2/terragrunt_linux_amd64
+    dest: /usr/local/bin/terragrunt
+    checksum: sha256:https://github.com/gruntwork-io/terragrunt/releases/download/v0.36.2/SHA256SUMS
+    mode: '0755'
