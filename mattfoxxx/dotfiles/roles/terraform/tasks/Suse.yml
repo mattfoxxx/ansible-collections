@@ -5,6 +5,21 @@
     name: terraform
     state: present
 
+- name: Download terraform-ls binary
+  become: true
+  ansible.builtin.get_url:
+    url: https://releases.hashicorp.com/terraform-ls/0.26.0/terraform-ls_0.26.0_linux_amd64.zip
+    dest: /tmp/terraform-ls_0.26.0_linux_amd64.zip
+    checksum: sha256:https://releases.hashicorp.com/terraform-ls/0.26.0/terraform-ls_0.26.0_SHA256SUMS
+    mode: '0755'
+
+- name: Install terraform-ls binary
+  become: true
+  ansible.builtin.unarchive:
+    src: /tmp/terraform-ls_0.26.0_linux_amd64.zip
+    dest: /usr/local/bin/terraform-ls
+    remote_src: no
+
 - name: Download and install terragrunt binary
   become: true
   ansible.builtin.get_url:
