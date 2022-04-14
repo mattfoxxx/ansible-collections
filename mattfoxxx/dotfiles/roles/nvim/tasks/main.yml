@@ -23,6 +23,16 @@
   with_items: "{{ users }}"
 
 
+- name: copy mardown preview dotfile for nvim
+  copy:
+    src: "mkdp.vim"
+    dest: "/home/{{ item }}/.config/nvim/mkdp.vim"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: "0644"
+  with_items: "{{ users }}"
+
+
 - name: Create lua directory if it does not exist
   become: true
   ansible.builtin.file:

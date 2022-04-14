@@ -1,6 +1,7 @@
 " set runtimepath^=~/.vim runtimepath+=~/.vim/after
 " let &packpath = &runtimepath
 source ~/.vim.keybinds
+set mouse=a
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -15,6 +16,12 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+
+" Snippet collection
+Plug 'rafamadriz/friendly-snippets'
+
+" Linters
+Plug 'mfussenegger/nvim-lint'
 
 "File browsing
 Plug 'nvim-telescope/telescope-file-browser.nvim'
@@ -33,6 +40,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 "magit
 Plug 'TimUntersberger/neogit'
+Plug 'APZelos/blamer.nvim'
 
 " colorscheme
 "Plug 'arcticicestudio/nord-vim'
@@ -44,11 +52,19 @@ Plug 'kyazdani42/nvim-web-devicons'
 " nvim-tree
 Plug 'kyazdani42/nvim-tree.lua'
 
+" nvim-cokeline for buffers
+Plug 'noib3/nvim-cokeline'
+
 " salt-vim
 Plug 'saltstack/salt-vim'
 
+" vim surround
+Plug 'tpope/vim-surround'
+
 " markdown preview
 Plug 'ellisonleao/glow.nvim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+source ~/.config/nvim/mkdp.vim
 
 " support more filetypes
 Plug 'sheerun/vim-polyglot'
@@ -58,6 +74,9 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Vim Script
 Plug 'folke/which-key.nvim'
+
+" Dashboard like doom emacs
+Plug 'glepnir/dashboard-nvim'
 
 call plug#end()
 
@@ -100,6 +119,14 @@ lua << EOF
   }
   local wk = require("which-key")
   wk.register({
+  ["<Tab>"] = { "<Plug>(cokeline-focus-next)", "focus next buffer" },
+  ["<S-Tab>"] = { "<Plug>(cokeline-focus-prev)", "focus previous buffer" },
+  ["<leader>b"] = {
+    name = "+Buffers",
+    d = { "<cmd>bd<cr>", "kill buffer" },
+    n = { "<Plug>(cokeline-switch-next)", "switch next buffer" },
+    p = { "<Plug>(cokeline-switch-prev)", "switch previous buffer" },
+  },
   ["<leader>f"] = {
     name = "+file",
     f = { "<cmd>Telescope find_files<cr>", "Find file" },
@@ -110,14 +137,36 @@ lua << EOF
     s = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Grep over File" },
     t = { "<cmd>NvimTreeToggle<cr>", "Toggle file browser" },
   },
+  ["<leader>g"] = {
+    name = "+Git",
+    g = { "<cmd>Neogit<cr>", "Neogit" },
+    b = { "<cmd>BlamerToggle<cr>", "Neogit" },
+  },
+  ["<leader>m"] = {
+    name = "+Markdown",
+    p = { "<cmd>Glow<cr>", "Preview with glow" },
+    t = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle browser preview" },
+    m = { "<cmd>MarkdownPreview<cr>", "Start browser preview" },
+    s = { "<cmd>MarkdownPreviewStop<cr>", "Stop browser preview" },
+	u = { "<cmd>!mark -c ~/.mark -f %<cr>", "Upload to confluence with mark" },
+	r = { "<cmd>!plantuml %<cr>", "Render plantuml image" },
+  },
   ["<leader>t"] = {
     name = "+tabs",
-    n = { "<cmd>tabnew<cr>", "New tab" },
+    t = { "<cmd>tabnew<cr>", "New tab" },
+	n = { "<cmd>tabnext<cr>", "Next tab" },
+	p = { "<cmd>tabprev<cr>", "Previous tab" },
     x = { "<cmd>tabclose<cr>", "Close tab" },
   },
   ["<leader>t<Tab>"] = { "<cmd>tabnext<cr>", "Next tab" },
   ["<leader>t<S-Tab>"] = { "<cmd>tabprev<cr>", "Previous tab" },
 })
+
+
+-- nvim lint
+require('lint').linters_by_ft = {
+  markdown = {'vale', 'markdownlint', }
+}
 EOF
 
 " nvim-tree
@@ -133,12 +182,21 @@ nnoremap <leader>nt :NvimTreeFindFile<CR>
 " NvimTreeCollapse
 " NvimTreeCollapseKeepBuffers
 
-" markdown preview glow
-noremap <leader>mp :Glow<CR>
+" dashboard-nvim
+let g:mapleader="\<Space>"
+let g:dashboard_default_executive = 'telescope'
+nmap <Leader>ss :<C-u>SessionSave<CR>
+nmap <Leader>sl :<C-u>SessionLoad<CR>
+nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
+nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
+nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
+nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
+nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 
-" neogit
-nnoremap <leader>gg <cmd>Neogit<cr>
 
 " FORMATTING
 autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
 
+" Linting
+au BufWritePost <buffer> lua require('lint').try_lint()
