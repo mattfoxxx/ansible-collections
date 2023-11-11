@@ -14,24 +14,24 @@
 - name: Add configuration for tmux
   copy:
     src: "{{ tmux_config }}"
-    dest: "/home/{{ item }}/.tmux.conf"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    dest: "/home/{{ item.name }}/.tmux.conf"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: "0644"
   with_items: "{{ users }}"
 
 - name: Install tmux plugin manager with git
   git:
     repo: "https://github.com/tmux-plugins/tpm"
-    dest: "/home/{{ item }}/.tmux/plugins/tpm"
+    dest: "/home/{{ item.name }}/.tmux/plugins/tpm"
     update: yes
   with_items: "{{ users }}"
 
-- name: change ownership of .pyenv
+- name: change ownership of .tmux directory
   file:
-    path: "/home/{{ item }}/.tmux"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    path: "/home/{{ item.name }}/.tmux"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
     state: directory
     recurse: yes
   with_items: "{{ users }}"

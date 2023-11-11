@@ -4,61 +4,62 @@
   remote_user: matze
   vars:
     users:
-      - matze
-#    tmux_config: "my_tmux.conf"
-#    vim_config: "my_vimrc.conf"
+      - name: mintert
+        group: staff
+  #    tmux_config: "my_tmux.conf"
+  #    vim_config: "my_vimrc.conf"
 
   roles:
     - {
-        role: mattfoxxx.dotfiles.setup,
-        tags: ["setup", "always"],
-        when: ansible_distribution == "Archlinux"
-      }
+      role: mattfoxxx.dotfiles.setup,
+      tags: ["all", "setup", "always"],
+      when: ansible_distribution == "Archlinux"
+    }
     - {
-        role: mattfoxxx.dotfiles.tmux,
-        tags: ["tmux"],
-#        vars: { users: ["test"] },
-      }
+      role: mattfoxxx.dotfiles.tmux,
+      tags: ["all", "tmux"],
+      #        vars: { users: ["test"] },
+    }
     - {
-        role: mattfoxxx.dotfiles.vim,
-        tags: ["vim"],
-      }
+      role: mattfoxxx.dotfiles.vim,
+      tags: ["all", "vim"],
+    }
     - {
-        role: mattfoxxx.dotfiles.nvim,
-        tags: ["nvim"],
-      }
+      role: mattfoxxx.dotfiles.nvim,
+      tags: ["all", "nvim"],
+    }
     - {
-        role: mattfoxxx.dotfiles.zsh,
-        tags: ["zsh"],
-      }
+      role: mattfoxxx.dotfiles.zsh,
+      tags: ["all", "zsh"],
+    }
     - {
-        role: mattfoxxx.dotfiles.rbenv,
-        tags: ["rbenv"],
-      }
+      role: mattfoxxx.dotfiles.rbenv,
+      tags: ["all", "rbenv"],
+    }
     - {
-        role: mattfoxxx.dotfiles.syncthing,
-        tags: ["syncthing"],
-      }
+      role: mattfoxxx.dotfiles.syncthing,
+      tags: ["all", "syncthing"],
+    }
     - {
-        role: mattfoxxx.dotfiles.pyenv,
-        tags: ["pyenv"],
-      }
+      role: mattfoxxx.dotfiles.pyenv,
+      tags: ["all", "pyenv"],
+    }
     - {
-        role: mattfoxxx.dotfiles.testkitchen,
-        tags: ["testkitchen"],
-      }
+      role: mattfoxxx.dotfiles.testkitchen,
+      tags: ["all", "testkitchen"],
+    }
     - {
-        role: mattfoxxx.dotfiles.golang,
-        tags: ["golang", "devops"],
-      }
+      role: mattfoxxx.dotfiles.golang,
+      tags: ["all", "golang", "devops"],
+    }
     - {
-        role: mattfoxxx.dotfiles.terraform,
-        tags: ["terraform", "devops"],
-      }
+      role: mattfoxxx.dotfiles.terraform,
+      tags: ["all", "terraform", "devops"],
+    }
     - {
-        role: mattfoxxx.dotfiles.rclone,
-        tags: ["rclone", "shell"],
-      }
+      role: mattfoxxx.dotfiles.rclone,
+      tags: ["all", "rclone", "shell"],
+    }
 
   tasks:
     - name: Debug users var
