@@ -1,6 +1,8 @@
 ---
 # tasks file for zsh
 - include_tasks: variables.yml
+  tags:
+    - unbound
 
 
 - name: Include os specific tasks
