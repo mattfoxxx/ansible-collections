@@ -22,6 +22,15 @@
     mode: "0644"
   with_items: "{{ users }}"
 
+- name: copy keybinds dotfile for vim
+  copy:
+    src: "{{ vim_keybinds }}"
+    dest: "/home/{{ item }}/.vimrc.keybinds"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: "0644"
+  with_items: "{{ users }}"
+
 - name: Git checkout
   git:
     repo: "{{ vundle }}"

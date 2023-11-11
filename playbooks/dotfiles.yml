@@ -24,12 +24,20 @@
         tags: ["vim"],
       }
     - {
+        role: mattfoxxx.dotfiles.nvim,
+        tags: ["nvim"],
+      }
+    - {
         role: mattfoxxx.dotfiles.zsh,
         tags: ["zsh"],
       }
     - {
         role: mattfoxxx.dotfiles.rbenv,
         tags: ["rbenv"],
+      }
+    - {
+        role: mattfoxxx.dotfiles.syncthing,
+        tags: ["syncthing"],
       }
     - {
         role: mattfoxxx.dotfiles.pyenv,

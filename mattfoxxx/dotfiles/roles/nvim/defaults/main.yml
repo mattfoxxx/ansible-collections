@@ -3,6 +3,6 @@
 # clone vundle to bundle directory ~/.vim/bundle/Vundle.vim
 users:
   - matze
-vim_config: "vimrc"
-vim_keybinds: "vimrc.keybinds"
+nvim_config: "init.vim"
+nvim_lua_dir: "lua"
 vundle: "https://github.com/VundleVim/Vundle.vim.git"

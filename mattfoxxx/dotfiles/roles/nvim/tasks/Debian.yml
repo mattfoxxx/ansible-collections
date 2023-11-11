@@ -1,0 +1,6 @@
+---
+- name: Install vim with pacman
+  become: true
+  ansible.builtin.package:
+    name: neovim
+    state: present

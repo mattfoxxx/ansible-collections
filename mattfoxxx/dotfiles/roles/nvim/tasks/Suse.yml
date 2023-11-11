@@ -1,0 +1,10 @@
+---
+- name: Install vim with zypper
+  become: true
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - neovim
+    - fd
+    - ripgrep

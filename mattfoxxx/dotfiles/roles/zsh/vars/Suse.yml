@@ -1,0 +1,10 @@
+---
+# vars file for zsh
+__zsh_packages:
+  - unzip
+  - direnv
+  - zsh
+  - fzf
+  - fzf-zsh-completion
+  - fontconfig
+  - noto-coloremoji-fonts

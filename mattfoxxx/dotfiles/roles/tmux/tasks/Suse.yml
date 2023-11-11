@@ -1,0 +1,5 @@
+---
+- name: Install tmux with zypper
+  ansible.builtin.package:
+    name: tmux
+    state: present
