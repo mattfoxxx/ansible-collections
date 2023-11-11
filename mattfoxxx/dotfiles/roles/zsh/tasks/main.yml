@@ -17,7 +17,6 @@
     - unbound
 
 - name: change user shell to zsh
-  become: true
   user:
     name: "{{ item.name }}"
     shell: /bin/zsh
