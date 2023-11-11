@@ -34,7 +34,6 @@
 
 
 - name: Create lua directory if it does not exist
-  become: true
   ansible.builtin.file:
     path: "{{ home_dirs }}/{{ item.name }}/.config/nvim/lua"
     owner: "{{ item.name }}"
@@ -63,7 +62,6 @@
     #  with_items: "{{ users }}"
 
 - name: Create vim plug directory if it does not exist
-  become: true
   ansible.builtin.file:
     path: "{{ home_dirs }}/{{ item.name }}/.local/share/nvim/site/autoload/"
     owner: "{{ item.name }}"
