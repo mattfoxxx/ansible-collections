@@ -3,3 +3,5 @@
   ansible.builtin.package:
     name: tmux
     state: present
+  tags:
+    - install

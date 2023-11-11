@@ -1,7 +1,3 @@
 ---
 # defaults file for tmux
-home_dirs: /home
-users:
-  - name: matze
-    group: matze
-tmux_config: "tmux.conf"
+tmux_template: "tmux.conf.jinja"

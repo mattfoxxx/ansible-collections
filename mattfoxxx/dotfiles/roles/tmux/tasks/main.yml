@@ -12,26 +12,25 @@
     - unbound
 
 - name: Add configuration for tmux
-  copy:
-    src: "{{ tmux_config }}"
-    dest: "{{ home_dirs }}/{{ item.name }}/.tmux.conf"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
+  template:
+    src: "{{ tmux_template }}"
+    dest: "{{ ansible_user_dir }}/.tmux.conf"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
     mode: "0644"
-  with_items: "{{ users }}"
 
 - name: Install tmux plugin manager with git
   git:
     repo: "https://github.com/tmux-plugins/tpm"
-    dest: "{{ home_dirs }}/{{ item.name }}/.tmux/plugins/tpm"
+    dest: "{{ ansible_user_dir }}/.tmux/plugins/tpm"
     update: yes
-  with_items: "{{ users }}"
+  tags:
+    - install
 
 - name: change ownership of .tmux directory
   file:
-    path: "{{ home_dirs }}/{{ item.name }}/.tmux"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
+    dest: "{{ ansible_user_dir }}/.tmux"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
     state: directory
     recurse: yes
-  with_items: "{{ users }}"

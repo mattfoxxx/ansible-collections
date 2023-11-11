@@ -6,3 +6,5 @@
       - tmux
       - xsel
     state: present
+  tags:
+    - install
