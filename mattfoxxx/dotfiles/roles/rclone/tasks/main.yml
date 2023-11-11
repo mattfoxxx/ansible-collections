@@ -15,17 +15,17 @@
 - name: Create directory for systemd unit
   file:
     state: directory
-    path: "/home/{{ item }}/.config/systemd/user/"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    path: "{{ home_dirs }}/{{ item.name }}/.config/systemd/user/"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
   with_items: "{{ users }}"
 
 - name: Create user systemd unit for rclone
   template:
     src: rclone.service.jinja
-    dest: "/home/{{ item }}/.config/systemd/user/rclone.service"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    dest: "{{ home_dirs }}/{{ item.name }}/.config/systemd/user/rclone.service"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: 0640
   with_items: "{{ users }}"
 
@@ -43,7 +43,7 @@
     name: rclone
     scope: user
   environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ item }}"
+    XDG_RUNTIME_DIR: "/run/user/{{ item.name }}"
   with_items: "{{ users }}"
   when: rclone_conf_exists | bool
 
@@ -53,6 +53,6 @@
     name: rclone
     scope: user
   environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ item }}"
+    XDG_RUNTIME_DIR: "/run/user/{{ item.name }}"
   with_items: "{{ users }}"
   when: rclone_conf_exists | bool

@@ -1,8 +1,10 @@
 ---
 # defaults file for vim
 # clone vundle to bundle directory ~/.vim/bundle/Vundle.vim
+home_dirs: /home
 users:
-  - matze
+  - name: matze
+    group: matze
 vim_config: "vimrc"
 vim_keybinds: "vimrc.keybinds"
 vundle: "https://github.com/VundleVim/Vundle.vim.git"

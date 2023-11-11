@@ -8,7 +8,7 @@
 
 - name: Add golang to .zshrc
   blockinfile:
-    path: "/home/{{ item }}/.zshrc"
+    path: "{{ home_dirs }}/{{ item.name }}/.zshrc"
     marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for GOLANG -->"
     block: |
       # enable go binaries

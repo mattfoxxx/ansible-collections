@@ -3,6 +3,7 @@
   hosts: all
   remote_user: matze
   vars:
+    home_dirs: /Users
     users:
       - name: mintert
         group: staff

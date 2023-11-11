@@ -21,7 +21,7 @@
 - name: Install pyenv with git
   git:
     repo: "https://github.com/pyenv/pyenv.git"
-    dest: "/home/{{ item }}/.pyenv"
+    dest: "{{ home_dirs }}/{{ item.name }}/.pyenv"
     depth: "1"
     version: master
   diff: false
@@ -30,7 +30,7 @@
 - name: Install pyenv-virtualenv with git
   git:
     repo: "https://github.com/pyenv/pyenv-virtualenv.git"
-    dest: "/home/{{ item }}/.pyenv/plugins/pyenv-virtualenv"
+    dest: "{{ home_dirs }}/{{ item.name }}/.pyenv/plugins/pyenv-virtualenv"
     depth: "1"
     version: master
   diff: false
@@ -39,7 +39,7 @@
 - name: Install pyenv-virtualenvwrapper with git
   git:
     repo: "https://github.com/pyenv/pyenv-virtualenvwrapper.git"
-    dest: "/home/{{ item }}/.pyenv/plugins/pyenv-virtualenvwrapper"
+    dest: "{{ home_dirs }}/{{ item.name }}/.pyenv/plugins/pyenv-virtualenvwrapper"
     depth: "1"
     version: master
   diff: false
@@ -47,19 +47,19 @@
 
 - name: change ownership of .pyenv
   file:
-    path: "/home/{{ item }}/.pyenv"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    path: "{{ home_dirs }}/{{ item.name }}/.pyenv"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     state: directory
     recurse: yes
   with_items: "{{ users }}"
 
 - name: Add pyenv to .zshrc
   blockinfile:
-    path: "/home/{{ item }}/.zshrc"
+    path: "{{ home_dirs }}/{{ item.name }}/.zshrc"
     create: true
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: 0640
     marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for PYENV -->"
     block: |
@@ -74,10 +74,10 @@
 
 - name: Add pyenv to .zprofile
   blockinfile:
-    path: "/home/{{ item }}/.zprofile"
+    path: "{{ home_dirs }}/{{ item.name }}/.zprofile"
     create: true
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: 0640
     marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for PYENV -->"
     block: |
@@ -90,10 +90,10 @@
 
 - name: Add pyenv to .profile
   blockinfile:
-    path: "/home/{{ item }}/.profile"
+    path: "{{ home_dirs }}/{{ item.name }}/.profile"
     create: true
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: 0640
     marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for PYENV -->"
     block: |
@@ -110,7 +110,7 @@
 
 - name: Add zsh plugin for pyenv
   lineinfile:
-    path: "/home/{{ item }}/.zshrc"
+    path: "{{ home_dirs }}/{{ item.name }}/.zshrc"
     insertafter: "^plugins=.*"
     line: "    pyenv"
   with_items: "{{ users }}"

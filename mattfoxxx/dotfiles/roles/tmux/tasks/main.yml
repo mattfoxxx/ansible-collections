@@ -14,7 +14,7 @@
 - name: Add configuration for tmux
   copy:
     src: "{{ tmux_config }}"
-    dest: "/home/{{ item.name }}/.tmux.conf"
+    dest: "{{ home_dirs }}/{{ item.name }}/.tmux.conf"
     owner: "{{ item.name }}"
     group: "{{ item.group }}"
     mode: "0644"
@@ -23,13 +23,13 @@
 - name: Install tmux plugin manager with git
   git:
     repo: "https://github.com/tmux-plugins/tpm"
-    dest: "/home/{{ item.name }}/.tmux/plugins/tpm"
+    dest: "{{ home_dirs }}/{{ item.name }}/.tmux/plugins/tpm"
     update: yes
   with_items: "{{ users }}"
 
 - name: change ownership of .tmux directory
   file:
-    path: "/home/{{ item.name }}/.tmux"
+    path: "{{ home_dirs }}/{{ item.name }}/.tmux"
     owner: "{{ item.name }}"
     group: "{{ item.group }}"
     state: directory

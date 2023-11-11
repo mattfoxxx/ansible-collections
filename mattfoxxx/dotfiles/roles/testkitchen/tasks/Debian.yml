@@ -1,7 +1,7 @@
 ---
 - name: Check if ruby {{ ruby_version }} already exists
   stat:
-    path: /home/{{ item }}/.rbenv/versions/{{ ruby_version }}
+    path: /home/{{ item.name }}/.rbenv/versions/{{ ruby_version }}
   register: ruby_installed
   with_items: "{{ users }}"
 

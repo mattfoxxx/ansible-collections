@@ -28,7 +28,7 @@
 
 - name: Add ruby bin to .zshrc
   blockinfile:
-    path: "/home/{{ item }}/.zshrc"
+    path: "{{ home_dirs }}/{{ item.name }}/.zshrc"
     marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for TESTKITCHEN -->"
     block: |
       if which ruby >/dev/null && which gem >/dev/null; then

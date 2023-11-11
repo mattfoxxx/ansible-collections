@@ -1,5 +1,7 @@
 ---
 # defaults file for tmux
+home_dirs: /home
 users:
-  - matze
+  - name: matze
+    group: matze
 tmux_config: "tmux.conf"

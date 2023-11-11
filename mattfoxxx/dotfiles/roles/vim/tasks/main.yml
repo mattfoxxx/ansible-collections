@@ -16,23 +16,23 @@
 - name: copy dotfile for vim
   copy:
     src: "{{ vim_config }}"
-    dest: "/home/{{ item }}/.vimrc"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    dest: "{{ home_dirs }}/{{ item.name }}/.vimrc"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: "0644"
   with_items: "{{ users }}"
 
 - name: copy keybinds dotfile for vim
   copy:
     src: "{{ vim_keybinds }}"
-    dest: "/home/{{ item }}/.vimrc.keybinds"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    dest: "{{ home_dirs }}/{{ item.name }}/.vimrc.keybinds"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: "0644"
   with_items: "{{ users }}"
 
 - name: Git checkout
   git:
     repo: "{{ vundle }}"
-    dest: "/home/{{ item }}/.vim/bundle/Vundle.vim"
+    dest: "{{ home_dirs }}/{{ item.name }}/.vim/bundle/Vundle.vim"
   with_items: "{{ users }}"

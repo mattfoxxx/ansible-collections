@@ -16,9 +16,9 @@
 - name: copy dotfile for nvim
   copy:
     src: "{{ nvim_config }}"
-    dest: "/home/{{ item }}/.config/nvim/init.vim"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    dest: "{{ home_dirs }}/{{ item.name }}/.config/nvim/init.vim"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: "0644"
   with_items: "{{ users }}"
 
@@ -26,9 +26,9 @@
 - name: copy mardown preview dotfile for nvim
   copy:
     src: "mkdp.vim"
-    dest: "/home/{{ item }}/.config/nvim/mkdp.vim"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    dest: "{{ home_dirs }}/{{ item.name }}/.config/nvim/mkdp.vim"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: "0644"
   with_items: "{{ users }}"
 
@@ -36,9 +36,9 @@
 - name: Create lua directory if it does not exist
   become: true
   ansible.builtin.file:
-    path: "/home/{{ item }}/.config/nvim/lua"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    path: "{{ home_dirs }}/{{ item.name }}/.config/nvim/lua"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: "0750"
     state: directory
   with_items: "{{ users }}"
@@ -47,16 +47,16 @@
 - name: copy lua dir for nvim
   synchronize:
     src: "{{ nvim_lua_dir }}"
-    dest: "/home/{{ item }}/.config/nvim/lua/"
+    dest: "{{ home_dirs }}/{{ item.name }}/.config/nvim/lua/"
     recursive: yes
   with_items: "{{ users }}"
 
     #- name: copy lua dir for nvim
     #  copy:
     #    src: "{{ nvim_lua_dir }}"
-    #    dest: "/home/{{ item }}/.config/nvim/lua/"
-    #    owner: "{{ item }}"
-    #    group: "{{ item }}"
+    #    dest: "{{ home_dirs }}/{{ item.name }}/.config/nvim/lua/"
+    #    owner: "{{ item.name }}"
+    #    group: "{{ item.group }}"
     #    mode: "0644"
     #    remote_src: yes
     #    directory_mode: yes
@@ -65,9 +65,9 @@
 - name: Create vim plug directory if it does not exist
   become: true
   ansible.builtin.file:
-    path: "/home/{{ item }}/.local/share/nvim/site/autoload/"
-    owner: "{{ item }}"
-    group: "{{ item }}"
+    path: "{{ home_dirs }}/{{ item.name }}/.local/share/nvim/site/autoload/"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
     mode: "0750"
     state: directory
   with_items: "{{ users }}"
@@ -76,6 +76,6 @@
 - name: Download vim-plug
   get_url:
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    dest: "/home/{{ item }}/.local/share/nvim/site/autoload/plug.vim"
+    dest: "{{ home_dirs }}/{{ item.name }}/.local/share/nvim/site/autoload/plug.vim"
     mode: '0644'
   with_items: "{{ users }}"

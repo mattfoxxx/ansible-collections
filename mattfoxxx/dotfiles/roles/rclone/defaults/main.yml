@@ -1,6 +1,8 @@
 ---
 # defaults file for rclone
+home_dirs: /home
 users:
-  - matze
+  - name: matze
+    group: matze
 rclone_stanza: drive
 rclone_mountpoint: drive

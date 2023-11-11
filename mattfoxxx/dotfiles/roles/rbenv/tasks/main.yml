@@ -14,7 +14,7 @@
 - name: Install ruby-build with git
   git:
     repo: "https://github.com/rbenv/ruby-build.git"
-    dest: "/home/{{ item }}/.rbenv/plugins/ruby-build"
+    dest: "{{ home_dirs }}/{{ item.name }}/.rbenv/plugins/ruby-build"
     depth: "1"
     version: master
   diff: false
@@ -27,5 +27,5 @@
 - name: edit .zshrc
   lineinfile:
     line: 'eval "$(rbenv init -)"'
-    path: "/home/{{ item }}/.zshrc"
+    path: "{{ home_dirs }}/{{ item.name }}/.zshrc"
   with_items: "{{ users }}"
