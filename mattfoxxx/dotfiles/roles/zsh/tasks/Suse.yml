@@ -10,7 +10,7 @@
 - name: Check if fonts are already installed
   ansible.builtin.shell: |
     set -o pipefail
-    fc-list | grep -i "{{ item.name }}"
+    fc-list | grep -i "{{ ansible_user_id }}"
   args:
     executable: /bin/bash
   with_items: "{{ nerd_fonts }}"

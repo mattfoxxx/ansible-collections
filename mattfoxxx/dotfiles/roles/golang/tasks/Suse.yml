@@ -8,9 +8,8 @@
 
 - name: Add golang to .zshrc
   blockinfile:
-    path: "{{ home_dirs }}/{{ item.name }}/.zshrc"
+    path: "{{ ansible_user_dir }}/.zshrc"
     marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for GOLANG -->"
     block: |
       # enable go binaries
       export PATH="$PATH:$HOME/go/bin"
-  with_items: "{{ users }}"

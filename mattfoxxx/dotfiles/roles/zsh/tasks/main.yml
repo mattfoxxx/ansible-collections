@@ -18,91 +18,81 @@
 
 - name: change user shell to zsh
   user:
-    name: "{{ item.name }}"
+    name: "{{ ansible_user_id }}"
     shell: /bin/zsh
-  with_items: "{{ users }}"
 
 - name: Install oh-my-zsh with git
   git:
     repo: "https://github.com/ohmyzsh/ohmyzsh.git"
-    dest: "{{ home_dirs }}/{{ item.name }}/.oh-my-zsh"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh"
     depth: "1"
     version: master
     update: no
   diff: false
-  with_items: "{{ users }}"
 
 - name: Install powerlevel10k with git
   git:
     repo: "https://github.com/romkatv/powerlevel10k.git"
-    dest: "{{ home_dirs }}/{{ item.name }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/powerlevel10k"
     depth: "1"
     version: "master"
   diff: false
-  with_items: "{{ users }}"
 
 - name: Install zsh-autosuggestions with git
   git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "{{ home_dirs }}/{{ item.name }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
     depth: "1"
     version: master
   diff: false
-  with_items: "{{ users }}"
 
 - name: Install zsh-syntax-highlighting with git
   git:
     repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    dest: "{{ home_dirs }}/{{ item.name }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
     depth: "1"
     version: master
   diff: false
-  with_items: "{{ users }}"
 
 - name: Install zsh-completions with git
   git:
     repo: "https://github.com/zsh-users/zsh-completions"
-    dest: "{{ home_dirs }}/{{ item.name }}/.oh-my-zsh/custom/plugins/zsh-completions"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-completions"
     depth: "1"
     version: master
   diff: false
-  with_items: "{{ users }}"
 
 - name: change ownership of .oh-my-zsh
   file:
-    path: "{{ home_dirs }}/{{ item.name }}/.oh-my-zsh"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
+    path: "{{ ansible_user_dir }}/.oh-my-zsh"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
     state: directory
     recurse: yes
-  with_items: "{{ users }}"
 
 - name: copy dotfile for zsh
   blockinfile:
-    path: "{{ home_dirs }}/{{ item.name }}/.zshrc"
+    path: "{{ ansible_user_dir }}/.zshrc"
     marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for ZSHRC -->"
     block: "{{ lookup('file', zsh_config) }}"
     create: yes
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
     mode: "0644"
-  with_items: "{{ users }}"
 
 - name: copy dotfile for zshenv
   copy:
     src: "{{ zshenv_config }}"
-    dest: "{{ home_dirs }}/{{ item.name }}/.zshenv"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
+    dest: "{{ ansible_user_dir }}/.zshenv"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
     mode: "0644"
-  with_items: "{{ users }}"
   when: ansible_distribution != "MacOSX"
 
 - name: copy dotfile for powerlevel10k
   copy:
     src: "{{ p10k_config }}"
-    dest: "{{ home_dirs }}/{{ item.name }}/.p10k.zsh"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
+    dest: "{{ ansible_user_dir }}/.p10k.zsh"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
     mode: "0644"
-  with_items: "{{ users }}"

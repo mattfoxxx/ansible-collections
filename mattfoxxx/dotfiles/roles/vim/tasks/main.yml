@@ -16,23 +16,20 @@
 - name: copy dotfile for vim
   copy:
     src: "{{ vim_config }}"
-    dest: "{{ home_dirs }}/{{ item.name }}/.vimrc"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
+    dest: "{{ ansible_user_dir }}/.vimrc"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
     mode: "0644"
-  with_items: "{{ users }}"
 
 - name: copy keybinds dotfile for vim
   copy:
     src: "{{ vim_keybinds }}"
-    dest: "{{ home_dirs }}/{{ item.name }}/.vimrc.keybinds"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
+    dest: "{{ ansible_user_dir }}/.vimrc.keybinds"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
     mode: "0644"
-  with_items: "{{ users }}"
 
 - name: Git checkout
   git:
     repo: "{{ vundle }}"
-    dest: "{{ home_dirs }}/{{ item.name }}/.vim/bundle/Vundle.vim"
-  with_items: "{{ users }}"
+    dest: "{{ ansible_user_dir }}/.vim/bundle/Vundle.vim"

@@ -15,19 +15,17 @@
 - name: Create directory for systemd unit
   file:
     state: directory
-    path: "{{ home_dirs }}/{{ item.name }}/.config/systemd/user/"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
-  with_items: "{{ users }}"
+    path: "{{ ansible_user_dir }}/.config/systemd/user/"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
 
 - name: Create user systemd unit for rclone
   template:
     src: rclone.service.jinja
-    dest: "{{ home_dirs }}/{{ item.name }}/.config/systemd/user/rclone.service"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/rclone.service"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
     mode: 0640
-  with_items: "{{ users }}"
 
 - name: Check if config file exists
   ansible.builtin.shell: test -e ~/.config/rclone/rclone.conf && echo true || echo false
@@ -43,8 +41,7 @@
     name: rclone
     scope: user
   environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ item.name }}"
-  with_items: "{{ users }}"
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_id }}"
   when: rclone_conf_exists | bool
 
 - name: Start systemd user unit
@@ -53,6 +50,5 @@
     name: rclone
     scope: user
   environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ item.name }}"
-  with_items: "{{ users }}"
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_user_id }}"
   when: rclone_conf_exists | bool

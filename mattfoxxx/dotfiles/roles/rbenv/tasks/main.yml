@@ -14,18 +14,16 @@
 - name: Install ruby-build with git
   git:
     repo: "https://github.com/rbenv/ruby-build.git"
-    dest: "{{ home_dirs }}/{{ item.name }}/.rbenv/plugins/ruby-build"
+    dest: "{{ ansible_user_dir }}/.rbenv/plugins/ruby-build"
     depth: "1"
     version: master
   diff: false
   environment:
     GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
-  with_items: "{{ users }}"
   when:
     ansible_facts["os_family"] != "Suse"
 
 - name: edit .zshrc
   lineinfile:
     line: 'eval "$(rbenv init -)"'
-    path: "{{ home_dirs }}/{{ item.name }}/.zshrc"
-  with_items: "{{ users }}"
+    path: "{{ ansible_user_dir }}/.zshrc"

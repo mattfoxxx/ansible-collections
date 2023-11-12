@@ -1,9 +1,8 @@
 ---
 - name: Check if ruby {{ ruby_version }} already exists
   stat:
-    path: /home/{{ item.name }}/.rbenv/versions/{{ ruby_version }}
+    path: /home/{{ ansible_user_id }}/.rbenv/versions/{{ ruby_version }}
   register: ruby_installed
-  with_items: "{{ users }}"
 
 - name: Debug ruby_installed variable
   debug:
