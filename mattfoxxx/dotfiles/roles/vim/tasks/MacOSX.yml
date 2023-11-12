@@ -1,5 +1,5 @@
 ---
-- name: Install tmux with brew
+- name: Install packages with brew
   community.general.homebrew:
     name: vim
     state: present
