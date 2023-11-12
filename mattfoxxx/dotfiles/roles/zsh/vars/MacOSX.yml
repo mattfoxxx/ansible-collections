@@ -1,6 +1,6 @@
 ---
 # vars file for zsh
-__zsh_packages:
+zsh_packages:
   - zsh
   - direnv
   - atuin
