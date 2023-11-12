@@ -22,6 +22,8 @@
     GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
   when:
     ansible_facts["os_family"] != "Suse"
+  tags:
+    - install
 
 - name: edit .zshrc
   blockinfile:

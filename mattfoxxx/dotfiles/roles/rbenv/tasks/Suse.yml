@@ -5,6 +5,8 @@
     repo: 'https://download.opensuse.org/repositories/devel:languages:ruby:extensions/openSUSE_Tumbleweed/devel:languages:ruby:extensions.repo'
     state: present
     runrefresh: yes
+  tags:
+    - install
 
 - name: Install rbenv
   become: true
@@ -14,6 +16,8 @@
       - rbenv
       - ruby-devel
     state: present
+  tags:
+    - install
 
 
 - name: Install ruby devel pattern
@@ -23,3 +27,5 @@
       - devel_ruby
     state: present
     type: pattern
+  tags:
+    - install

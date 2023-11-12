@@ -8,3 +8,5 @@
     - neovim
     - fd
     - ripgrep
+  tags:
+    - install

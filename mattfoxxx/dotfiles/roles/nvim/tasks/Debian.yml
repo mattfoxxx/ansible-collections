@@ -4,3 +4,5 @@
   ansible.builtin.package:
     name: neovim
     state: present
+  tags:
+    - install

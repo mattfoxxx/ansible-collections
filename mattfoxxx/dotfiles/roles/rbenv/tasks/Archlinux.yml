@@ -6,9 +6,13 @@
       - ruby
       - rubygems
     state: present
+  tags:
+    - install
 
 - name: Install rbenv from aur
   kewlfft.aur.aur:
     name: "rbenv"
   become: true
   become_user: aur_builder
+  tags:
+    - install

@@ -6,3 +6,5 @@
       - rbenv
       - ruby-dev
     state: present
+  tags:
+    - install
