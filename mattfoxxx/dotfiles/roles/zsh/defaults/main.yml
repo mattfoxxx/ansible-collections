@@ -1,14 +1,13 @@
 ---
 # defaults file for zsh
-home_dirs: /home
-users:
-  - name: matze
-    group: matze
 nerd_fonts_release: "2.2.0-RC"
 nerd_fonts:
   - {zipfile: "FiraCode", name: "Fira Code"}
   - {zipfile: "Iosevka", name: "Iosevka"}
-zsh_config: "zshrc"
+zsh_template: "zshrc.jinja"
+zprofile_template: "zprofile.jinja"
 zshenv_config: "zshenv"
 p10k_config: "p10k.zsh"
 # vundle: "https://github.com/VundleVim/Vundle.vim.git"
+private_functions: |
+  no_functions_found () {echo "define some!"}

@@ -1,0 +1,120 @@
+alias \?="duck"
+alias \?\?="google"
+alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
+
+{% if ansible_system | lower == "linux" %}
+alias bcl='xmodmap -e "keycode 91 mod2 = KP_Delete period"; bc -l; xmodmap -e "keycode 91 mod2 = KP_Delete comma"'
+{%  endif %}
+
+#alias cal='gcal --starting-day=1'
+alias gl='git log --oneline --all --graph --decorate=full'
+alias ls=exa
+alias less=bat
+alias cat=bat
+
+#####
+# saltstack
+############
+pillar_prod() {
+	if test -f $1; then
+		cat $1 | gpg --armor --batch --trust-model always --encrypt -r salt@medianet-freiburg.de | pbcopy
+		echo "File contents encrypted!"
+	else
+		echo -n "$1" | gpg --armor --batch --trust-model always --encrypt -r salt@medianet-freiburg.de | pbcopy
+		echo "String contents encrypted!"
+	fi
+}
+
+pillar_dev() {
+	if test -f $1; then
+		cat $1 | gpg --armor --batch --trust-model always --encrypt -r saltdev@medianet-freiburg.de | pbcopy
+		echo "File contents encrypted!"
+	else
+		echo -n "$1" | gpg --armor --batch --trust-model always --encrypt -r saltdev@medianet-freiburg.de | pbcopy
+		echo "String contents encrypted!"
+	fi
+}
+
+#####
+# ansible
+############
+ansible-vault-encrypt() {
+    ansible-vault encrypt_string --stdin-name "$1" 2>/dev/null | tee /dev/tty | {%- if ansible_system | lower == "linux" %}xclip{%- else %}pbcopy{%- endif %}
+}
+
+ansible-vault-encrypt-file() {
+    ansible-vault encrypt ${@:2}
+}
+
+ansible-vault-view-file() {
+    ansible-vault view ${@:2}
+}
+
+ansible-vault-edit-file() {
+    ansible-vault edit $1
+}
+
+#####
+# openssl
+############
+ssl_check_cert() {
+	echo | openssl s_client -verify_quiet -connect $1:$2 | openssl x509 -noout -dates -ext subjectAltName
+}
+ssl_create_csr () {
+	openssl req -nodes -newkey rsa:4096 -keyout $1.key -out $1.csr -config ../$1.conf
+	cat $1.csr | pbcopy
+}
+ssl_create_pem() {
+	openssl pkcs7 -print_certs -in $1.p7b -out $1.pem
+	cat $1.pem | pbcopy
+}
+ssl_check_csr () {
+	openssl req -in $1.csr -noout -text
+	cat $1.csr | pbcopy
+}
+ssl_check_key () {
+	(
+	openssl rsa -noout -modulus -in $1.key | openssl md5
+	openssl req -noout -modulus -in $1.csr | openssl md5
+	) | uniq
+}
+ssl_check_all () {
+	(
+	openssl rsa -noout -modulus -in $1.key | openssl md5
+	openssl req -noout -modulus -in $1.csr | openssl md5
+	openssl x509 -noout -modulus -in $1.pem | openssl md5
+	) | uniq
+}
+
+#####
+# bitwarden
+############
+bws() {
+	bw login --apikey 2>/dev/null
+	LASTSYNC=$(bw status 2>/dev/null | jq '.lastSync' | tr -d '"')
+	STATUS=$(bw status 2>/dev/null | jq '.status' | tr -d '"')
+	if [[ $STATUS == "locked" ]]; then
+		# Only sync if we need to unlock
+		if [ ${LASTSYNC::10} != $(date +'%Y-%m-%d') ]; then
+			bw sync 2>/dev/null
+		fi
+		# Ask for password
+		read -s "password?Vaultwarden password: "
+		# Set session env var for future requests
+		export BW_SESSION=$(echo $password | bw unlock --raw 2>/dev/null)
+	fi
+	bw list items --search $1 2>/dev/null | jq -C '.[] | {name: .name, uris: .uris, login: .login, attachments: .attachments}' | bat
+}
+
+{{ private_functions }}
+
+{% if ansible_system | lower == "darwin" %}
+##
+# Your previous $HOME/.zprofile file was backed up as $HOME/.zprofile.macports-saved_2023-08-08_at_11:10:45
+##
+
+# MacPorts Installer addition on 2023-08-08_at_11:10:45: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+{% endif %}

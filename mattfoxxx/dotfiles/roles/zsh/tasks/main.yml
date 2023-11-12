@@ -20,6 +20,8 @@
   user:
     name: "{{ ansible_user_id }}"
     shell: /bin/zsh
+  tags:
+    - install
 
 - name: Install oh-my-zsh with git
   git:
@@ -29,6 +31,8 @@
     version: master
     update: no
   diff: false
+  tags:
+    - install
 
 - name: Install powerlevel10k with git
   git:
@@ -37,6 +41,8 @@
     depth: "1"
     version: "master"
   diff: false
+  tags:
+    - install
 
 - name: Install zsh-autosuggestions with git
   git:
@@ -45,6 +51,8 @@
     depth: "1"
     version: master
   diff: false
+  tags:
+    - install
 
 - name: Install zsh-syntax-highlighting with git
   git:
@@ -53,6 +61,8 @@
     depth: "1"
     version: master
   diff: false
+  tags:
+    - install
 
 - name: Install zsh-completions with git
   git:
@@ -61,6 +71,8 @@
     depth: "1"
     version: master
   diff: false
+  tags:
+    - install
 
 - name: change ownership of .oh-my-zsh
   file:
@@ -74,7 +86,17 @@
   blockinfile:
     path: "{{ ansible_user_dir }}/.zshrc"
     marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for ZSHRC -->"
-    block: "{{ lookup('file', zsh_config) }}"
+    block: "{{ lookup('ansible.builtin.template', zsh_template) }}"
+    create: yes
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
+    mode: "0644"
+
+- name: copy dotfile for zprofile
+  blockinfile:
+    path: "{{ ansible_user_dir }}/.zprofile"
+    marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for ZSHRC -->"
+    block: "{{ lookup('ansible.builtin.template', zprofile_template) }}"
     create: yes
     owner: "{{ ansible_user_uid }}"
     group: "{{ ansible_user_gid }}"

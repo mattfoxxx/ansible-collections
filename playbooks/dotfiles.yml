@@ -2,14 +2,6 @@
 - name: Install dotfiles and applications
   hosts: all
   remote_user: matze
-  vars:
-    home_dirs: /Users
-    users:
-      - name: mintert
-        group: staff
-  #    tmux_config: "my_tmux.conf"
-  #    vim_config: "my_vimrc.conf"
-
   roles:
     - {
       role: mattfoxxx.dotfiles.setup,
