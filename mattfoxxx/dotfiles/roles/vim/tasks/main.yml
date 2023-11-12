@@ -33,3 +33,5 @@
   git:
     repo: "{{ vundle }}"
     dest: "{{ ansible_user_dir }}/.vim/bundle/Vundle.vim"
+  tags:
+    - install

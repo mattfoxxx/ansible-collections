@@ -1,0 +1,7 @@
+---
+- name: Install packages with brew
+  community.general.homebrew:
+    name: nvim
+    state: present
+  tags:
+    - install

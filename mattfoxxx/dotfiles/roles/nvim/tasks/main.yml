@@ -46,17 +46,6 @@
     dest: "{{ ansible_user_dir }}/.config/nvim/lua/"
     recursive: yes
 
-    #- name: copy lua dir for nvim
-    #  copy:
-    #    src: "{{ nvim_lua_dir }}"
-    #    dest: "{{ ansible_user_dir }}/.config/nvim/lua/"
-    #    owner: "{{ ansible_user_uid }}"
-    #    group: "{{ ansible_user_gid }}"
-    #    mode: "0644"
-    #    remote_src: yes
-    #    directory_mode: yes
-    #
-
 - name: Create vim plug directory if it does not exist
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.local/share/nvim/site/autoload/"
@@ -71,3 +60,5 @@
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     dest: "{{ ansible_user_dir }}/.local/share/nvim/site/autoload/plug.vim"
     mode: '0644'
+  tags:
+    - install
