@@ -1,6 +1,6 @@
 ---
 # vars file for zsh
-zsh_packages:
+__zsh_packages:
   - unzip
   - direnv
   - zsh

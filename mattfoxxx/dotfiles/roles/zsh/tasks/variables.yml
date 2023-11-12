@@ -9,3 +9,8 @@
     loop_var: distro_item
   tags:
     - unbound
+
+- name: Define packages
+  set_fact:
+    zsh_packages: "{{ __zsh_packages | list }}"
+  when: (__zsh_packages is defined) and (zsh_packages is not defined)

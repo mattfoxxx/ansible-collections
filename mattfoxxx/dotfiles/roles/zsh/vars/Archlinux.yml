@@ -1,5 +1,5 @@
 ---
-zsh_packages:
+__zsh_packages:
   - zsh
   - fzf
   - noto-fonts-emoji
