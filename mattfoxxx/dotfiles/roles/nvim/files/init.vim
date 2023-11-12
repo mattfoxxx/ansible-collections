@@ -1,6 +1,6 @@
 " set runtimepath^=~/.vim runtimepath+=~/.vim/after
 " let &packpath = &runtimepath
-source ~/.vim.keybinds
+source ~/.vimrc.keybinds
 set mouse=a
 
 call plug#begin('~/.config/nvim/plugged')
