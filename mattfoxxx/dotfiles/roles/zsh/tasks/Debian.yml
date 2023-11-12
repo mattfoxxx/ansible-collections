@@ -43,4 +43,3 @@
     executable: /bin/bash
   changed_when: nerd_fonts_installed.changed
   when: nerd_fonts_installed.changed
-
