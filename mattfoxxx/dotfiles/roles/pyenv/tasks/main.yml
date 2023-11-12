@@ -73,7 +73,7 @@
         eval "$(pyenv init -)"
       fi
       export PYENV_VIRTUALENVWRAPPER_PREFER_PYENV="true"
-      export WORKON_HOME=$HOME/.venvs
+      export WORKON_HOME=$HOME/.virtualenvs
       eval "$(pyenv virtualenv-init -)"
       pyenv virtualenvwrapper_lazy
 
@@ -110,9 +110,3 @@
       export WORKON_HOME=$HOME/.virtualenvs
       eval "$(pyenv virtualenv-init -)"
       pyenv virtualenvwrapper_lazy
-
-- name: Add zsh plugin for pyenv
-  lineinfile:
-    path: "{{ ansible_user_dir }}/.zshrc"
-    insertafter: "^plugins=.*"
-    line: "    pyenv"
