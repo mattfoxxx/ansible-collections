@@ -1,0 +1,7 @@
+---
+- name: Install tmux with brew
+  community.general.homebrew:
+    name: vim
+    state: present
+  tags:
+    - install

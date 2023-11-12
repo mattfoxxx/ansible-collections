@@ -76,7 +76,8 @@ set modelines=10
 
 "Handling
 set backspace=indent,eol,start "Makes backspace key more powerful.
-set clipboard=unnamedplus "Clipboard system
+"set clipboard=unnamedplus "Clipboard system
+set clipboard=unnamed "Clipboard system
 set pastetoggle=<F2> " Better copy & paste
 set foldignore=" "
 set foldlevelstart=10
