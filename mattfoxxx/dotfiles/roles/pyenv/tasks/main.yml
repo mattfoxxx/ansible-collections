@@ -17,6 +17,7 @@
   pip:
     name: virtualenvwrapper
     executable: pip3
+  when: ansible_distribution != "MacOSX"
   tags:
     - install
 
@@ -27,6 +28,7 @@
     depth: "1"
     version: master
   diff: false
+  when: ansible_distribution != "MacOSX"
   tags:
     - install
 
@@ -37,6 +39,7 @@
     depth: "1"
     version: master
   diff: false
+  when: ansible_distribution != "MacOSX"
   tags:
     - install
 
@@ -47,6 +50,7 @@
     depth: "1"
     version: master
   diff: false
+  when: ansible_distribution != "MacOSX"
   tags:
     - install
 
@@ -57,6 +61,7 @@
     group: "{{ ansible_user_gid }}"
     state: directory
     recurse: yes
+  when: ansible_distribution != "MacOSX"
   tags:
     - install
 

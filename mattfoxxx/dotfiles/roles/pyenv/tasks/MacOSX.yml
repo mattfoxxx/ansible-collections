@@ -5,5 +5,9 @@
     state: present
   with_items:
     - python3
+    - pyenv
+    - pyenv-virtualenv
+    - pyenv-virtualenvwrapper
+    - virtualenvwrapper
   tags:
     - install
