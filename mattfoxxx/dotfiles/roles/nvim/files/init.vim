@@ -38,6 +38,10 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 "Telescope
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
+"telekasten
+Plug 'renerocksai/telekasten.nvim'
+Plug 'renerocksai/calendar-vim'
+
 "magit
 Plug 'TimUntersberger/neogit'
 Plug 'APZelos/blamer.nvim'
@@ -63,8 +67,18 @@ Plug 'tpope/vim-surround'
 
 " markdown preview
 Plug 'ellisonleao/glow.nvim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 source ~/.config/nvim/mkdp.vim
+
+" markdown tables
+Plug 'dhruvasagar/vim-table-mode'
+let g:table_mode_corner='|'
+
+" markdown easy align
+Plug 'junegunn/vim-easy-align'
+au FileType markdown map <Bar> vip :EasyAlign*<Bar><Enter>
+
 
 " support more filetypes
 Plug 'sheerun/vim-polyglot'
@@ -148,7 +162,7 @@ lua << EOF
     t = { "<cmd>MarkdownPreviewToggle<cr>", "Toggle browser preview" },
     m = { "<cmd>MarkdownPreview<cr>", "Start browser preview" },
     s = { "<cmd>MarkdownPreviewStop<cr>", "Stop browser preview" },
-	u = { "<cmd>!mark -c ~/.mark -f %<cr>", "Upload to confluence with mark" },
+	u = { "<cmd>!mark -f '%'<cr>", "Upload to confluence with mark" },
 	r = { "<cmd>!plantuml %<cr>", "Render plantuml image" },
   },
   ["<leader>t"] = {
@@ -158,9 +172,24 @@ lua << EOF
 	p = { "<cmd>tabprev<cr>", "Previous tab" },
     x = { "<cmd>tabclose<cr>", "Close tab" },
   },
+  ["<leader>z"] = {
+    name = "+tabs",
+	b = { "<cmd>Telekasten show_backlinks<cr>", "Show backlinks" },
+	c = { "<cmd>Telekasten show_calendar<cr>", "Open calendar" },
+	d = { "<cmd>Telekasten goto_today<cr>", "Open today's daily note" },
+	f = { "<cmd>Telekasten find_note<cr>", "Find notes" },
+	g = { "<cmd>Telekasten search_note<cr>", "Grep notes" },
+	I = { "<cmd>Telekasten insert_img_link<cr>", "Browse image and media to insert a link" },
+	n = { "<cmd>Telekasten new_note<cr>", "New note" },
+    t = { "<cmd>Telekasten panel<cr>", "Command panel" },
+	z = { "<cmd>Telekasten follow_link<cr>", "Follow Link" },
+  },
   ["<leader>t<Tab>"] = { "<cmd>tabnext<cr>", "Next tab" },
   ["<leader>t<S-Tab>"] = { "<cmd>tabprev<cr>", "Previous tab" },
 })
+
+
+-- vim.keybind.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
 
 
 -- nvim lint
@@ -168,6 +197,8 @@ require('lint').linters_by_ft = {
   markdown = {'vale', 'markdownlint', }
 }
 EOF
+
+inoremap [[ <ESC>:Telekasten insert_link<CR>
 
 " nvim-tree
 nnoremap <C-e> :NvimTreeToggle<CR>
@@ -199,4 +230,4 @@ nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
 
 " Linting
-au BufWritePost <buffer> lua require('lint').try_lint()
+au BufWritePost *.md lua require('lint').try_lint()
