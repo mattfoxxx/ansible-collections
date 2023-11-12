@@ -10,4 +10,4 @@ zshenv_config: "zshenv"
 p10k_config: "p10k.zsh"
 # vundle: "https://github.com/VundleVim/Vundle.vim.git"
 private_functions: |
-  no_functions_found () {echo "define some!"}
+  no_functions_found() {echo "define some!"}
