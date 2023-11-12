@@ -10,10 +10,6 @@ __zsh_packages:
   - glab
   - bitwarden-cli
   - gpg
-  - font-fira-code-nerd-font
-  - font-iosevka-nerd-font
-  - font-noto-sans
-  - font-source-code-pro
   - glow
   - jq
   - lnav
@@ -21,3 +17,8 @@ __zsh_packages:
   - p7zip
   - pinentry-mac
   - htop
+zsh_cask_packages:
+  - font-fira-code-nerd-font
+  - font-iosevka-nerd-font
+  - font-noto-sans
+  - font-source-code-pro

@@ -6,3 +6,11 @@
   with_items: "{{ zsh_packages }}"
   tags:
     - install
+
+- name: Install cask packages with brew
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ zsh_cask_packages }}"
+  tags:
+    - install
