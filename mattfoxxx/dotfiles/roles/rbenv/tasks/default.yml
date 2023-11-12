@@ -1,9 +1,9 @@
 - block:
     - name: "end play for unsupported distribution"
       debug:
-        msg: |
+        msg: >
           This distribution {{ ansible_distribution }} is not supported by this role.
           You can exclude this role by using the tag {{ (ansible_role_name | split('.'))[-1] }}.
-          The play ends here.
-    - name: End play
-      meta: end_play
+          The role ends here.
+    - name: End role
+      meta: end_batch
