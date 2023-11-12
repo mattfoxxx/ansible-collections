@@ -24,6 +24,12 @@
     ansible_facts["os_family"] != "Suse"
 
 - name: edit .zshrc
-  lineinfile:
-    line: 'eval "$(rbenv init -)"'
+  blockinfile:
     path: "{{ ansible_user_dir }}/.zshrc"
+    marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK for RBENV -->"
+    block: |
+      eval "$(rbenv init -)"
+    create: yes
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
+    mode: "0644"

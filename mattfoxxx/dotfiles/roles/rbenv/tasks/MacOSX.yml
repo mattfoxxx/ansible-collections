@@ -1,0 +1,10 @@
+---
+- name: Install packages with brew
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - ruby
+    - rbenv
+  tags:
+    - install
