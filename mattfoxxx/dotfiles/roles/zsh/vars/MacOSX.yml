@@ -13,12 +13,14 @@ __zsh_packages:
   - glow
   - jq
   - lnav
-  - tmuxp
   - p7zip
   - pinentry-mac
   - htop
+  - exa
+  - bat
 zsh_cask_packages:
   - font-fira-code-nerd-font
   - font-iosevka-nerd-font
   - font-noto-sans
   - font-source-code-pro
+  - font-meslo-lg-nerd-font

@@ -1,7 +1,11 @@
 ---
 - name: Install tmux with brew
   community.general.homebrew:
-    name: tmux
+    name: "{{ item }}"
     state: present
+  with_items:
+    - tmux
+    - tmuxp
+    - reattach-to-user-namespace
   tags:
     - install
