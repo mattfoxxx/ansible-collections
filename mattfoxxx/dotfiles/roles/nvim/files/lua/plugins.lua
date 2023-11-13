@@ -37,8 +37,8 @@ require('nvim-tree').setup({
   hijack_cursor = false,
   hijack_netrw = true,
   hijack_unnamed_buffer_when_opening = false,
-  ignore_buffer_on_setup = false,
-  open_on_setup = false,
+  -- ignore_buffer_on_setup = false,
+  -- open_on_setup = false,
   open_on_tab = false,
   sort_by = "name",
   update_cwd = false,
@@ -50,12 +50,12 @@ require('nvim-tree').setup({
     number = false,
     relativenumber = false,
     signcolumn = "yes",
-    mappings = {
-      custom_only = false,
-      list = {
-        -- user mappings go here
-      },
-    },
+    -- mappings = {
+    --   custom_only = false,
+    --   list = {
+    --     -- user mappings go here
+    --   },
+    -- },
   },
   hijack_directories = {
     enable = true,
@@ -66,7 +66,7 @@ require('nvim-tree').setup({
     update_cwd = false,
     ignore_list = {},
   },
-  ignore_ft_on_setup = {},
+  -- ignore_ft_on_setup = {},
   system_open = {
     cmd = nil,
     args = {},
@@ -136,15 +136,15 @@ vim.g.indent_blankline_buftype_exclude = {'nofile'}
 vim.g.indent_blankline_filetype_exclude = { 'man', 'dashboard' }
 -- vim.opt.listchars:append("eol:↴")
 
-require("indent_blankline").setup {
-    show_end_of_line = false,
-}
+require("ibl").setup()
 
 -- luasnip
 require("luasnip.loaders.from_vscode").lazy_load()
 
 -- nvim-bufferline / cokeline
-local get_hex = require('cokeline/utils').get_hex
+
+local get_hex = require('cokeline.hlgroups').get_hl_attr
+
 
 require('cokeline').setup({
   default_hl = {
@@ -176,7 +176,7 @@ require('cokeline').setup({
       text = function(buffer) return buffer.filename .. ' ' end,
     },
     {
-      text = '',
+      text = '',
       delete_buffer_on_left_click = true,
     },
     {
