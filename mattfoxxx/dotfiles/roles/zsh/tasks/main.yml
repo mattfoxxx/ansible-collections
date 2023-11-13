@@ -118,3 +118,20 @@
     owner: "{{ ansible_user_uid }}"
     group: "{{ ansible_user_gid }}"
     mode: "0644"
+
+- name: create bin directory
+  file:
+    path: "{{ ansible_user_dir }}/.local/bin"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
+    state: directory
+    recurse: yes
+
+- name: copy executables
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/"
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
+    mode: "0750"
+  with_filetree: "{{ zsh_bin_dir }}"

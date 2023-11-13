@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/Users/mintert/.virtualenvs/local/bin/python /Users/mintert/git/oauth2ms/oauth2ms 2>/dev/null
