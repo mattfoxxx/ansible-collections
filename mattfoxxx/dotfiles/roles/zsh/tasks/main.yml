@@ -74,6 +74,16 @@
   tags:
     - install
 
+- name: Install zsh-vi-mode
+  git:
+    repo: "https://github.com/jeffreytse/zsh-vi-mode"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-vi-mode"
+    depth: "1"
+    version: master
+  diff: false
+  tags:
+    - install
+
 - name: change ownership of .oh-my-zsh
   file:
     path: "{{ ansible_user_dir }}/.oh-my-zsh"
